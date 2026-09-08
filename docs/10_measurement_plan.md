@@ -1,55 +1,43 @@
-# Measurement Plan
+# Measurement Methodology
 
-## Analog-input characterization
+Physical characterization is structured to separate front-end accuracy, converter performance, timebase behavior, and waveform-generation performance.
 
-Measure:
+## Analog input characterization
+
+The acquisition-channel measurement set includes:
 
 - input impedance;
-- attenuation accuracy;
+- attenuation ratio;
 - DC offset;
 - noise floor;
-- bandwidth;
+- frequency response;
 - passband flatness;
 - step response;
 - channel isolation;
-- channel-to-channel gain mismatch;
+- channel-to-channel gain matching;
 - channel skew.
 
-## ADC performance
+## ADC dynamic performance
 
-At several input frequencies and amplitudes:
+FFT-based characterization covers:
 
-- FFT;
 - SNR;
 - SINAD;
 - ENOB;
 - SFDR;
 - harmonic levels;
-- noise floor.
+- broadband noise floor.
 
-Use coherent sampling when possible and document windowing otherwise.
+Coherent sampling is preferred for converter-performance measurements, with windowed analysis used where coherent sampling is not practical.
 
-## Timebase
+## Timebase characterization
 
-Validate acquisition timebase against an independent frequency reference.
+The acquisition sample clock is compared with an independent frequency reference to quantify timebase error and long-term stability.
 
-## AWG
+## Waveform-generator characterization
 
-Measure:
+The AD9102 path is characterized for frequency accuracy, output amplitude, offset, flatness, output impedance, THD, SFDR, and reconstruction behavior.
 
-- frequency accuracy;
-- amplitude accuracy;
-- offset;
-- flatness;
-- output impedance;
-- THD;
-- SFDR;
-- reconstruction behavior.
+## Loopback characterization
 
-## Loopback
-
-Run repeatable AWG → oscilloscope tests at multiple frequencies and ranges.
-
-## Reporting rule
-
-No simulation-derived metric is promoted to a measured claim. Measurement CSVs should be stored separately from simulation CSVs and labeled with instrument/setup metadata.
+The on-board waveform generator provides a repeatable source for end-to-end AWG-to-ADC measurements across multiple frequencies, amplitudes, and acquisition modes.
