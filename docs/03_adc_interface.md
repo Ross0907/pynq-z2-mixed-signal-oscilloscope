@@ -1,49 +1,23 @@
 # AD9655 ADC and Clocking
 
-## Converter
+The acquisition converter is the **AD9655BCPZ-125**, configured as a dual 16-bit ADC with a 125 MHz converter clock.
 
-The acquisition converter is the **AD9655BCPZ-125**, a dual 16-bit ADC.
+## Analog interface
 
-The schematic includes:
-
-- analog AVDD rails;
-- digital DRVDD;
-- VREF / VCM / RBIAS support;
-- differential clock input;
-- SPI control;
-- source-synchronous differential data outputs;
-- FCO and DCO;
-- local decoupling;
-- FPGA-facing interface networks.
+The AD9655 input is driven by the ADA4927-2 fully differential stage. The converter section includes local AVDD and DRVDD decoupling together with the reference, common-mode, and bias support circuitry shown in the schematic.
 
 ## Clocking
 
-The board uses a dedicated 125 MHz oscillator for the converter clock path.
+A dedicated 125 MHz oscillator supplies the converter clock path. The PCB routes this clock as a high-speed differential signal with controlled geometry and a continuous reference path.
 
-Clock integrity is treated as a separate high-speed design problem because ADC SNR at high input frequencies is strongly affected by clock jitter.
+Clock quality directly affects converter performance at high analog input frequencies, so the clock path is treated independently from the lower-speed digital control interface.
 
-Pre-hardware verification therefore includes:
+## Digital interface
 
-- clock-source electrical compatibility;
-- differential path symmetry;
-- series/termination elements;
-- return-path continuity;
-- FPGA clock-resource mapping;
-- source-synchronous timing constraints.
+The converter presents differential data together with DCO and FCO timing signals. These routes form the source-synchronous interface to the PYNQ-Z2.
 
-## Data interface
+The FPGA architecture is based on dedicated input resources for differential reception, timing alignment, word reconstruction, and acquisition-mode handling.
 
-The ADC exposes differential data lanes plus DCO/FCO timing signals. The interface is routed to the PYNQ-Z2 and must be captured with SelectIO resources and explicit timing constraints rather than unconstrained fabric sampling.
+## Converter control
 
-## Bring-up sequence
-
-1. Verify all converter rails.
-2. Verify converter clock.
-3. Hold analog stimulus at a safe low-frequency level.
-4. Bring up SPI.
-5. Read/verify converter state.
-6. Enable deterministic test pattern.
-7. Verify all physical lanes.
-8. Verify DCO/FCO relationship.
-9. Verify reconstructed words.
-10. Only then enable normal analog conversion.
+SPI control provides deterministic converter configuration and access to test modes. The digital test-pattern path supports interface validation independently of the analog signal chain during hardware characterization.
