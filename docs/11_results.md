@@ -2,29 +2,32 @@
 
 ## Analog front end
 
+Frequency-response figures:
+
 - `AFE_DUAL_relative_transfer.png`
 - `AFE_FAST_relative_transfer.png`
 - `AFE_FAST_vs_DUAL_CH1.png`
-- four differential transient plots
-- four common-mode transient plots
 
-## AWG
+High-frequency differential transients:
+
+- `TRANSIENT_LOW_FAST_40MHz_differential.svg`
+- `TRANSIENT_LOW_DUAL_20MHz_differential.svg`
+- `TRANSIENT_HIGH_FAST_40MHz_differential.svg`
+- `TRANSIENT_HIGH_DUAL_20MHz_differential.svg`
+
+## Waveform generator
 
 - `AWG_postlayout_AC_response.png`
 - `AWG_postlayout_phase.png`
 - `AWG_1MHz_BNC_transient.png`
 - `AWG_1MHz_output_stage.png`
 
-## Quantitative table
+## Quantitative results
 
-The machine-generated quantitative results are stored in:
+`verification/results/COMPUTED_METRICS.csv` contains the numeric values derived from the committed simulation data.
 
-`verification/results/COMPUTED_METRICS.csv`
-
-## Raw source data
+## Raw simulation data
 
 - `verification/raw/afe/ac/`
 - `verification/raw/afe/transient/`
 - `verification/raw/awg/`
-
-The raw CSV is authoritative; plots are derived artifacts.
