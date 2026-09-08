@@ -1,0 +1,20 @@
+{
+  "repository": "pynq-z2-mixed-signal-oscilloscope",
+  "project_state": "pre-fabrication / pre-hardware-characterization",
+  "evidence_classes": [
+    "schematic",
+    "PCB layout",
+    "SPICE/post-layout simulation",
+    "PowerDC simulation",
+    "ADIsimDDS device-level simulation",
+    "raw CSV"
+  ],
+  "measured_hardware_results_included": false,
+  "primary_devices": [
+    "AD9655BCPZ-125",
+    "ADA4927-2YCPZ-R2",
+    "ADA4817-2ACP",
+    "AD9102BCPZ",
+    "TMUX1574RSVR"
+  ]
+}

@@ -1,0 +1,21 @@
+# KiCad temporary/backup files
+*-backups/
+*.lck
+*.tmp
+~*
+
+# MATLAB
+*.asv
+
+# Python
+__pycache__/
+*.pyc
+
+# OS/editor
+Thumbs.db
+.DS_Store
+.vscode/
+.idea/
+
+# Local measurement dumps not deliberately curated
+measurements/local/
