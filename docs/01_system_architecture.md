@@ -1,63 +1,29 @@
 # System Architecture
 
-## Objective
+The PYNQ-Z2 MDO combines two high-resolution analog acquisition channels, a logic-analyzer interface, an FPGA capture path, and an AD9102 waveform generator on a single mixed-signal platform.
 
-The instrument is designed as a complete mixed-signal acquisition and generation platform around the PYNQ-Z2 rather than as a standalone ADC breakout.
+## Acquisition path
 
-The design is split into five domains:
+Each analog channel contains input protection, selectable AC/DC coupling, high/low attenuation, an ADA4817-2 high-speed stage, selectable anti-alias filtering, TMUX1574 mode switching, and an ADA4927-2 fully differential ADC driver. The resulting differential signal is digitized by the AD9655.
 
-1. **Analog acquisition**
-2. **Data conversion and clocking**
-3. **FPGA capture/control**
-4. **Waveform generation**
-5. **Power and physical implementation**
+The converter interface is source-synchronous and routes differential data, DCO, and FCO signals to the XC7Z020 on the PYNQ-Z2.
 
 ## Acquisition modes
 
-### DUAL mode
+**DUAL mode** acquires both analog channels simultaneously at 62.5 MSPS/channel.
 
-Both ADC channels are acquired simultaneously. The architecture targets 62.5 MSPS per channel.
+**FAST mode** uses a selected channel at the full 125 MSPS converter data rate.
 
-### FAST mode
+The analog filtering follows the acquisition mode. The DUAL path is centered around the ~20 MHz filter network, while the FAST path uses the ~40 MHz network.
 
-One selected analog channel is routed through the fast path for 125 MSPS selected-channel acquisition.
+## Waveform generation
 
-The front-end filter selection is tied to the intended acquisition bandwidth: the board contains separate approximately 20 MHz and 40 MHz analog-filter paths instead of forcing one compromise filter onto both modes.
+The AD9102 subsystem provides the waveform-generation path. A 156.25 MHz board clock drives the DAC, with SPI control and trigger/reset signals originating from the PYNQ-Z2. The differential DAC output is converted and filtered before the ADA4817-2 output stage and 50 Ω BNC connector.
 
-## External interfaces
+## Power architecture
 
-The PCB exposes:
+The board distributes PYNQ-derived 3.3 V power and generates the local analog and converter rails required by the acquisition and waveform-generation circuits. Bipolar analog rails support the high-speed amplifiers, while local low-noise regulators supply sensitive converter domains.
 
-- CH1 BNC input;
-- CH2 BNC input;
-- dedicated function-generator BNC output;
-- PYNQ-Z2 interface connectors;
-- logic-analyzer interface;
-- power/control headers;
-- test points for internal rails and critical nodes.
+## Mechanical integration
 
-## Main devices
-
-| Device | Role |
-|---|---|
-| AD9655BCPZ-125 | Dual 16-bit ADC |
-| ADA4927-2 | Fully differential ADC driver |
-| ADA4817-2 | High-speed analog gain/buffer/output stages |
-| AD9102BCPZ | 14-bit waveform DAC / DDS |
-| TMUX1574 | High-speed signal-path switching |
-| LM27762 | Bipolar analog rail generation |
-| LP5907 | Local low-noise regulation |
-| TXS0104E / SN74LVCH8T245 | Digital level translation |
-| PYNQ-Z2 / XC7Z020 | Capture, control and processing |
-
-## Evidence philosophy
-
-Each numerical claim must be classified as one of:
-
-- **DESIGN TARGET**
-- **DEVICE CAPABILITY**
-- **SCHEMATIC SIMULATION**
-- **POST-LAYOUT SIMULATION**
-- **MEASURED**
-
-The repository deliberately does not convert simulation results into hardware claims.
+The PCB is shaped around the PYNQ-Z2 interface geometry and exposes two acquisition BNCs, one waveform-generator BNC, logic-analyzer connectivity, digital headers, test points, and mounting holes.
