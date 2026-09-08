@@ -16,6 +16,7 @@ Thumbs.db
 .DS_Store
 .vscode/
 .idea/
+PUBLISH_NEW_GITHUB_REPO.bat
 
 # Local measurement dumps not deliberately curated
 measurements/local/
