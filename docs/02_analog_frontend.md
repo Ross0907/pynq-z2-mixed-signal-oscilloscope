@@ -1,64 +1,39 @@
 # Analog Front End
 
-## Signal path
+The analog front end was designed as a loaded end-to-end signal chain extending from the BNC connector to the AD9655 input.
 
-Each oscilloscope channel combines:
+## Input network
 
-1. input protection;
-2. selectable input attenuation;
-3. AC/DC coupling;
-4. high-speed buffering/gain;
-5. selectable analog anti-alias filtering;
-6. acquisition-mode switching;
-7. fully differential ADC drive.
-
-The top-level KiCad schematic explicitly exposes `ATT_CH1`, `ATT_CH2`, `AAF_MODE`, `FAST_CH_SEL`, channel filter networks, the ADA4927-2 driver, and AD9655 inputs.
-
-## Input attenuation and protection
-
-The channel attenuation sheets use relay/switch-controlled high/low attenuation networks and small compensation capacitors. This allows the front end to extend input range without requiring the high-speed gain stage to absorb the complete input voltage.
-
-The protection network is part of the analog transfer function and therefore has to be verified with realistic capacitance rather than treated as an ideal clamp.
+Each channel includes protection, AC/DC coupling, and selectable high/low attenuation. The attenuation network extends the usable input range while maintaining the signal amplitude required by the active stages.
 
 ## High-speed amplification
 
-ADA4817-2 amplifiers are used in the analog signal chain. The layout around these parts is kept compact because feedback-loop inductance and capacitive loading can change peaking and phase margin at tens of MHz.
+ADA4817-2 amplifiers provide the high-speed buffering and gain functions. The PCB layout around these devices uses compact feedback paths and local decoupling to limit parasitic inductance and capacitive loading.
 
-## Anti-alias filters
+## Selectable anti-alias filtering
 
-Two analog filtering modes are used:
+Two filter paths support the two acquisition modes:
 
-- **DUAL AAF:** simulated -3 dB bandwidth ≈ 21.95 MHz
-- **FAST AAF:** simulated -3 dB bandwidth ≈ 41.21 MHz
+| Mode | Post-layout simulated -3 dB bandwidth |
+|---|---:|
+| DUAL | ~21.95 MHz |
+| FAST | ~41.21 MHz |
 
-The filter paths were evaluated with post-layout simulation data rather than only ideal schematic calculations.
+The DUAL filter provides approximately 36.1 dB attenuation at 31.25 MHz, while the FAST filter provides approximately 41.9 dB attenuation at 62.5 MHz.
 
-## FDA and ADC loading
+## Differential ADC drive
 
-The ADA4927-2 converts each signal into the differential representation required by the AD9655.
+The ADA4927-2 drives the AD9655 differentially. Simulation tracks the FDA differential output, ADC differential input, FDA common-mode voltage, and ADC common-mode voltage independently.
 
-Validation tracks separately:
+This separation captures both signal amplitude and common-mode behavior under the actual modeled ADC loading.
 
-- FDA differential output;
-- ADC input differential voltage;
-- FDA common mode;
-- ADC input common mode.
+## Transient matrix
 
-This is important because a waveform that appears correct only as `VOUT+ - VOUT-` can still violate common-mode requirements.
+The high-frequency transient set contains four operating combinations:
 
-## Validated transient matrix
+- Low range, FAST mode, 40 MHz
+- Low range, DUAL mode, 20 MHz
+- High range, FAST mode, 40 MHz
+- High range, DUAL mode, 20 MHz
 
-Committed raw CSVs cover:
-
-- Low range / FAST / 40 MHz
-- Low range / DUAL / 20 MHz
-- High range / DUAL / 20 MHz
-- High range / FAST / 40 MHz
-
-The primary evidence is under:
-
-`verification/raw/afe/transient/`
-
-Generated figures are under:
-
-`docs/assets/plots/`
+The corresponding raw CSV files are stored under `verification/raw/afe/transient/`.
