@@ -191,11 +191,11 @@ Common-mode behavior was evaluated separately at the FDA output and at the loade
 
 The waveform-generation subsystem is based on the **AD9102** and uses a **156.25 MHz board clock**. The DAC output is followed by the analog reconstruction/output stage and a dedicated 50 Ω BNC path.
 
-### ADIsimDDS operating points
+### ADIsimDDS 
 
 <p align="center">
-  <img src="docs/assets/adi/adisimdds_ad9102_1khz.png" width="48%" alt="AD9102 ADIsimDDS 1 kHz operating point">
-  <img src="docs/assets/adi/adisimdds_ad9102_10mhz.png" width="48%" alt="AD9102 ADIsimDDS 10 MHz operating point">
+  <img src="docs/assets/adi/adisimdds_ad9102_1khz.png" width="100%" alt="AD9102 ADIsimDDS 1 kHz operating point">
+  <img src="docs/assets/adi/adisimdds_ad9102_10mhz.png" width="100%" alt="AD9102 ADIsimDDS 10 MHz operating point">
 </p>
 
 ### Board-level output simulation
