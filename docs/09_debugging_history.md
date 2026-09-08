@@ -1,65 +1,23 @@
-# Engineering Debugging History
+# Design Iteration History
 
-This document should retain failed approaches because the path to a stable high-speed board is part of the engineering evidence.
+The project evolved through repeated schematic, simulation, extraction, and PCB-layout iterations.
 
-## Categories to preserve
+## Analog-front-end development
 
-### Analog simulation
+The analog path was refined around the loaded behavior of the filter, FDA, and ADC interface rather than ideal standalone stages. Filter response, large-signal behavior, common-mode level, and ADC loading were evaluated across both range states and both acquisition modes.
 
-Record:
+## Post-layout model development
 
-- unstable or peaking amplifier configurations;
-- incorrect ADC loading assumptions;
-- common-mode violations;
-- filter values that failed passband/stopband targets;
-- unrealistic ideal-switch assumptions;
-- model substitutions.
+Extracted-network work included correction of port mapping, differential-path connectivity, component-model association, and high-speed interconnect representation before the final post-layout response set was produced.
 
-### Post-layout extraction
+## PCB refinement
 
-Record:
+Layout iterations concentrated on the separation between the two analog channels, shorter FDA-to-ADC routes, ground-reference continuity, high-speed pair geometry, power distribution, and the placement of stitching vias around critical regions.
 
-- broken extracted differential networks;
-- invalid port topology;
-- incorrect component-model mapping;
-- via/contact graph issues;
-- return-path discontinuities;
-- corrected extraction models.
+## Digital-interface development
 
-### PCB
+The ADC interface architecture separates physical-lane reception, source-synchronous timing, word reconstruction, mode selection, buffering, and higher-level capture control. This structure allows digital-interface faults to be isolated from the analog front end during FPGA and hardware testing.
 
-Record:
+## Current revision
 
-- routing changes driven by SI;
-- component-footprint corrections;
-- differential-pair skew corrections;
-- ground-stitching additions;
-- channel isolation improvements;
-- manufacturing-rule corrections.
-
-### FPGA
-
-Record:
-
-- lane-order/polarity errors;
-- DCO/FCO timing issues;
-- SelectIO/IDELAY training;
-- DMA/trigger bugs;
-- capture alignment failures.
-
-## Entry format
-
-For each issue:
-
-```text
-Date:
-Subsystem:
-Observed evidence:
-Root cause:
-Schematic/layout/RTL change:
-Verification used:
-Result:
-Residual risk:
-```
-
-Do not replace a failed result with the final screenshot only. Keep the evidence trail.
+The repository represents the Rev. A pre-fabrication design together with its associated simulation and PCB-analysis results.
