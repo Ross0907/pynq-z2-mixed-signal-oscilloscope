@@ -6,9 +6,9 @@
 
 A custom **dual-channel 16-bit mixed-signal oscilloscope, logic-analyzer interface, and arbitrary-waveform/function-generator platform** designed around the **PYNQ-Z2**, **AD9655**, **AD9102**, **ADA4927-2**, and **ADA4817-2**.
 
-The project covers the complete mixed-signal path from the BNC input to FPGA capture: input protection, selectable attenuation and coupling, high-speed amplification, switchable anti-alias filtering, fully differential ADC drive, source-synchronous converter interfacing, four-layer PCB implementation, waveform generation, SPICE simulation, post-layout analysis, and power-integrity analysis.
+The project covers the complete mixed-signal path from the BNC input to FPGA capture: input protection, selectable attenuation and coupling, high-speed amplification, switchable anti-alias filtering, fully differential ADC drive, source-synchronous converter interfacing, four-layer PCB implementation, waveform generation, SPICE simulation, post-layout extraction, signal-integrity setup, and power-integrity analysis.
 
-The current revision is a pre-fabrication design. Numerical bandwidth and waveform figures shown here are simulation or post-layout simulation results unless explicitly labeled as measured.
+The current revision is a **pre-fabrication Rev. A design**. Numerical bandwidth, SINAD/ENOB, waveform, and power figures shown here are simulation or post-layout simulation results unless explicitly labeled as measured.
 
 ---
 
@@ -117,7 +117,7 @@ The board integrates two analog-input BNCs, a dedicated function-generator BNC, 
   <img src="docs/assets/hardware/pcb_layer_bcu.png" width="48%" alt="Back copper">
 </p>
 
-The four-layer layout uses a continuous reference plane for critical high-speed paths, dense ground stitching, short FDA-to-ADC interconnects, symmetric channel structures, localized converter decoupling, and physical separation between the acquisition, digital, power, and waveform-generation regions.
+The four-layer layout uses a continuous reference plane for critical high-speed paths, dense ground stitching, short FDA-to-ADC interconnects, symmetric channel structures, localized converter decoupling, and physical separation between acquisition, digital, power, and waveform-generation regions.
 
 ---
 
@@ -131,7 +131,7 @@ The top-level schematic contains the dual-channel acquisition chain, high/low at
 
 ## Analog front end
 
-The front end was developed as a complete loaded signal chain rather than as isolated amplifier stages. The simulation model includes attenuation, switching, filtering, FDA drive, and ADC loading.
+The front end was developed as a complete loaded signal chain rather than as isolated amplifier stages. The verification model includes attenuation, switching, filtering, FDA drive, ADC loading, both channels, both range states, and AC/DC coupling.
 
 ### DUAL filter mode
 
@@ -139,12 +139,11 @@ The front end was developed as a complete loaded signal chain rather than as iso
   <img src="docs/assets/plots/AFE_DUAL_relative_transfer.png" width="760" alt="DUAL mode AFE response">
 </p>
 
-Post-layout simulation:
+Current V7 loaded AC signoff across all DUAL cases:
 
-- CH1 `-3 dB` bandwidth: **~21.95 MHz**
-- CH2 `-3 dB` bandwidth: **~21.96 MHz**
-- CH1 attenuation at 31.25 MHz: **~36.08 dB**
-- CH2 attenuation at 31.25 MHz: **~36.04 dB**
+- `-3 dB` bandwidth: **21.955–21.978 MHz**
+- attenuation at the 31.25 MHz mode Nyquist: **36.03–36.12 dB**
+- passband ripple: **0.658–0.702 dB**
 
 ### FAST filter mode
 
@@ -152,12 +151,11 @@ Post-layout simulation:
   <img src="docs/assets/plots/AFE_FAST_relative_transfer.png" width="760" alt="FAST mode AFE response">
 </p>
 
-Post-layout simulation:
+Current V7 loaded AC signoff across all FAST cases:
 
-- CH1 `-3 dB` bandwidth: **~41.21 MHz**
-- CH2 `-3 dB` bandwidth: **~41.25 MHz**
-- CH1 attenuation at 62.5 MHz: **~41.86 dB**
-- CH2 attenuation at 62.5 MHz: **~41.80 dB**
+- `-3 dB` bandwidth: **41.011–41.091 MHz**
+- attenuation at the 62.5 MHz mode Nyquist: **42.00–42.22 dB**
+- passband ripple: **0.832–0.922 dB**
 
 ### Filter-mode comparison
 
@@ -165,13 +163,22 @@ Post-layout simulation:
   <img src="docs/assets/plots/AFE_FAST_vs_DUAL_CH1.png" width="760" alt="FAST and DUAL AFE comparison">
 </p>
 
-The two anti-alias paths align the analog bandwidth with the corresponding acquisition mode instead of using one fixed bandwidth for both operating conditions.
+The two anti-alias paths align the analog bandwidth with the corresponding acquisition mode instead of using one fixed bandwidth for both operating conditions. All eight AC-coupling cases also pass, with an extracted high-pass corner of **3.441–3.471 Hz**.
 
 ---
 
 ## High-frequency transient simulation
 
-The transient matrix spans both input ranges and both acquisition modes. Each plot shows the fully differential amplifier output together with the differential voltage presented to the ADC input. The displayed interval is 200 ns so several waveform cycles and the initial settling behavior are visible in the same figure.
+The transient matrix spans both input ranges and both acquisition modes. Each plot shows the fully differential amplifier output together with the differential voltage presented to the ADC input.
+
+The figures now use the **entire committed source record** rather than forcing every case into the earlier 0–200 ns crop. No waveform data is extrapolated, repeated, or synthesized.
+
+| Case | Exact plotted interval |
+|---|---:|
+| LOW / FAST / 40 MHz | 0–280.370 ns |
+| LOW / DUAL / 20 MHz | 0–500.000 ns |
+| HIGH / FAST / 40 MHz | 0–750.000 ns |
+| HIGH / DUAL / 20 MHz | 0–334.055 ns |
 
 <p align="center">
   <img src="docs/assets/plots/TRANSIENT_LOW_FAST_40MHz_differential.svg" width="48%" alt="Low range FAST mode transient">
@@ -183,7 +190,7 @@ The transient matrix spans both input ranges and both acquisition modes. Each pl
   <img src="docs/assets/plots/TRANSIENT_HIGH_DUAL_20MHz_differential.svg" width="48%" alt="High range DUAL mode transient">
 </p>
 
-Common-mode behavior was evaluated separately at the FDA output and at the loaded ADC input. The simulation CSVs corresponding to these operating points are included under [`verification/raw/afe/`](verification/raw/afe/).
+Common-mode behavior was evaluated separately at the FDA output and at the loaded ADC input. Exact plot windows are recorded in [`verification/results/TRANSIENT_PLOT_WINDOWS.csv`](verification/results/TRANSIENT_PLOT_WINDOWS.csv), and the source CSVs are retained under [`verification/raw/afe/transient/`](verification/raw/afe/transient/).
 
 ---
 
@@ -191,7 +198,7 @@ Common-mode behavior was evaluated separately at the FDA output and at the loade
 
 The waveform-generation subsystem is based on the **AD9102** and uses a **156.25 MHz board clock**. The DAC output is followed by the analog reconstruction/output stage and a dedicated 50 Ω BNC path.
 
-### ADIsimDDS 
+### ADIsimDDS
 
 <p align="center">
   <img src="docs/assets/adi/adisimdds_ad9102_1khz.png" width="100%" alt="AD9102 ADIsimDDS 1 kHz operating point">
@@ -206,7 +213,7 @@ The waveform-generation subsystem is based on the **AD9102** and uses a **156.25
 
 Post-layout simulation:
 
-- `-3 dB` output-path bandwidth: **~84.74 MHz**
+- `-3 dB` output-path bandwidth: **~84.7425 MHz**
 - 1 MHz BNC output with the modeled 50 Ω load: **~1.598 Vpp**
 - ADA4817-2 output swing in the same simulation: **~3.199 Vpp**
 
@@ -228,7 +235,63 @@ PowerDC simulations were used to examine regulator output voltages, sink voltage
   <img src="docs/assets/powerdc/sink_voltage_summary.png" width="100%" alt="PowerDC sink voltage results">
 </p>
 
-Additional PowerDC results are included in [`docs/assets/powerdc/`](docs/assets/powerdc/).
+These screenshots are baseline PI evidence. The final AWG-updated PowerDC copper solve is still an explicitly open pre-fabrication gate.
+
+---
+
+## Verification highlights
+
+The repository keeps raw evidence and derived metrics separate from presentation graphics. The plots below are generated directly from the committed result tables and are intended to make the signoff state visible without hiding the remaining open gates.
+
+### Analog AC matrix consistency
+
+<p align="center">
+  <img src="docs/assets/plots/VERIFICATION_AFE_bandwidth_consistency.svg" width="820" alt="Analog filter bandwidth consistency across all signoff runs">
+</p>
+
+All **16 loaded AC matrix cases pass** the current DUAL/FAST filter criteria. The tight spread also shows that channel, range, and coupling state do not materially shift the extracted `-3 dB` corner within each acquisition mode.
+
+### Modeled ADC + AFE dynamic performance
+
+<p align="center">
+  <img src="docs/assets/plots/VERIFICATION_AD9655_system_sinad.svg" width="820" alt="Modeled AD9655 and analog-front-end system SINAD">
+</p>
+
+Across the four principal operating cases, the pre-fabrication model gives:
+
+- system SINAD: **75.54–76.97 dB**
+- system ENOB: **12.255–12.493 bits**
+- useful-band AFE noise: **~25.4–26.0 µV RMS** in DUAL and **~36.3–36.8 µV RMS** in FAST
+- modeled AFE-induced SINAD degradation: **~0.25–0.50 dB**
+
+These are modeled results, not hardware measurements.
+
+### Extracted range-transfer diagnostic — open gate
+
+<p align="center">
+  <img src="docs/assets/plots/VERIFICATION_range_transfer_diagnostic.svg" width="820" alt="Extracted high-low range transfer diagnostic">
+</p>
+
+The anti-alias filters pass, but the **HIGH/LOW range-transfer gate remains OPEN**. The extracted source S47P collapses to approximately **2.1–2.3 dB LOW-minus-HIGH separation** through most of the MHz acquisition band, while the schematic-reference network remains near **10 dB**. The reduced S47P representation was cross-checked against the larger extracted network at the committed check points, so this discrepancy is not being hidden as a plotting or compact-model artifact.
+
+The schematic-level range networks requiring reconciliation are K1/K2 and their associated attenuation/compensation resistor-capacitor networks documented in [`docs/06_simulation_signoff.md`](docs/06_simulation_signoff.md) and [`docs/12_prefabrication_signoff_matrix.md`](docs/12_prefabrication_signoff_matrix.md).
+
+### Repository-level pre-fabrication gates
+
+| Gate | State |
+|---|---|
+| DUAL anti-alias response | **PASS** |
+| FAST anti-alias response | **PASS** |
+| AC-coupling transfer | **PASS** |
+| FDA/ADC loaded transients and common mode | **PASS** |
+| Modeled AD9655 + AFE dynamic performance | **PASS** |
+| AWG loaded transient / post-layout AC response | **PASS** |
+| Extracted HIGH/LOW range scaling | **OPEN** |
+| Final ADC digital 26-port PowerSI solve | **OPEN** |
+| Final AWG-updated PowerDC solve | **OPEN** |
+| Fabricated-board characterization / calibration / thermal validation | **OPEN** |
+
+A PASS means the stated criterion is closed for the supplied simulation or model evidence. It is not a substitute for final SI/PI solves or fabricated-board measurement.
 
 ---
 
@@ -238,18 +301,18 @@ The project combines several analysis levels:
 
 - **PSpice / SPICE:** AC response, large-signal transient behavior, ADC-loaded differential drive, common-mode behavior, switch/filter modes, and AWG output response.
 - **Post-layout extraction:** critical analog and high-speed interconnect behavior with PCB parasitics.
-- **Cadence Sigrity / PowerSI:** differential interconnect and return-path analysis for critical nets.
+- **Cadence Sigrity / PowerSI:** 26-port ADC digital-interface setup, structural validation, and final numerical SI closure workflow.
 - **PowerDC:** regulator, sink-voltage, rail-current, and power-loss analysis.
 - **KiCad:** schematic capture, four-layer PCB implementation, DRC, differential routing, stackup, and fabrication outputs.
 - **FPGA:** AD9655 control, source-synchronous capture, acquisition-mode logic, buffering, triggering, and host communication.
 
-The raw analog simulation data and the derived quantitative result table are under [`verification/`](verification/).
+The raw analog simulation data, solver provenance, and derived quantitative result tables are under [`verification/`](verification/).
 
 ---
 
 ## Hardware characterization
 
-Physical measurements begin after board fabrication. The characterization set covers input bandwidth, passband flatness, vertical gain and offset, channel matching, channel skew, ADC SNR/SINAD/ENOB/SFDR, timebase accuracy, AWG amplitude flatness and spectral purity, and end-to-end AWG-to-ADC loopback.
+Physical measurements begin after board fabrication. The characterization set covers input bandwidth, passband flatness, vertical gain and offset, channel matching, channel skew, ADC SNR/SINAD/ENOB/SFDR, timebase accuracy, AWG amplitude flatness and spectral purity, end-to-end AWG-to-ADC loopback, rail quality, and sustained-load thermal behavior.
 
 Those measurements are intentionally separate from the pre-fabrication simulation figures shown in this repository.
 
@@ -262,12 +325,14 @@ Those measurements are intentionally separate from the pre-fabrication simulatio
 - [ADC and clocking](docs/03_adc_interface.md)
 - [Function generator](docs/04_function_generator.md)
 - [PCB layout](docs/05_pcb_layout.md)
-- [Simulation results](docs/06_simulation_signoff.md)
+- [Simulation and analog signoff](docs/06_simulation_signoff.md)
 - [Signal and power integrity](docs/07_signal_power_integrity.md)
 - [Hardware bring-up and characterization](docs/08_bringup.md)
 - [Design iteration history](docs/09_debugging_history.md)
 - [Measurement methodology](docs/10_measurement_plan.md)
-- [Results index](docs/11_results.md)
+- [Results and evidence index](docs/11_results.md)
+- [Rev. A pre-fabrication signoff matrix](docs/12_prefabrication_signoff_matrix.md)
+- [Evidence provenance](docs/13_evidence_provenance.md)
 
 ---
 
@@ -288,12 +353,15 @@ Those measurements are intentionally separate from the pre-fabrication simulatio
 │   ├── 09_debugging_history.md
 │   ├── 10_measurement_plan.md
 │   ├── 11_results.md
+│   ├── 12_prefabrication_signoff_matrix.md
+│   ├── 13_evidence_provenance.md
 │   ├── assets/
 │   ├── schematics/
 │   └── pcb/
 ├── verification/
 │   ├── raw/
-│   └── results/
+│   ├── results/
+│   └── si_pi/
 ├── fpga/
 └── software/
 ```
