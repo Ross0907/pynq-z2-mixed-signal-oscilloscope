@@ -224,8 +224,8 @@ The power architecture includes the PYNQ-derived supply, local 3.3 V distributio
 PowerDC simulations were used to examine regulator output voltages, sink voltages, rail current, and board-level power loss.
 
 <p align="center">
-  <img src="docs/assets/powerdc/vrm_voltage_summary.png" width="48%" alt="PowerDC regulator voltage results">
-  <img src="docs/assets/powerdc/sink_voltage_summary.png" width="48%" alt="PowerDC sink voltage results">
+  <img src="docs/assets/powerdc/vrm_voltage_summary.png" width="100%" alt="PowerDC regulator voltage results">
+  <img src="docs/assets/powerdc/sink_voltage_summary.png" width="100%" alt="PowerDC sink voltage results">
 </p>
 
 Additional PowerDC results are included in [`docs/assets/powerdc/`](docs/assets/powerdc/).
