@@ -1,10 +1,10 @@
 # Signal and Power Integrity
 
-This document records the pre-fabrication SI/PI evidence and, equally importantly, the remaining solver gates. Structural setup validation is not presented as a solved S-parameter or DC-power result.
+This page summarizes the current pre-fabrication SI/PI setup and results. Structural setup validation is kept separate from numerical S-parameter and DC-power results.
 
 ## PCB reference structure
 
-The four-layer PCB uses the following physical stack in the final PowerSI-ready package:
+The four-layer PCB uses the following physical stack in the current PowerSI package:
 
 | Layer | Thickness |
 |---|---:|
@@ -19,17 +19,17 @@ The four-layer PCB uses the following physical stack in the final PowerSI-ready 
 | B.Mask | 10.0000 µm |
 | **Total** | **1597.7938 µm** |
 
-Critical high-speed routing is referenced to continuous ground structure where possible. The principal pre-fabrication review targets are the FDA-to-ADC analog differential paths, the AD9655 source-synchronous digital interface, DCO, the FAST/AUX switching path, the PYNQ connector transition and the 125 MHz clock path.
+Critical high-speed routing is referenced to continuous ground structure where possible. The principal analysis targets are the FDA-to-ADC analog differential paths, AD9655 source-synchronous digital interface, DCO, FAST/AUX switching path, PYNQ connector transition, and 125 MHz clock path.
 
-## Analog passive/extracted-network checks
+## Extracted passive-network checks
 
-Sampled extracted-network evidence was used to check connectivity and passive behavior before the full solver packages were reduced for review. The supplied sampled frontend network is reciprocal to numerical precision and is effectively passive through the acquisition band. These sampled files are review aids; they are not substitutes for the final digital 26-port solve.
+Sampled extracted networks were used to check connectivity and passive behavior. The sampled frontend network is reciprocal to numerical precision and is effectively passive through the acquisition band. These checks do not replace the final digital 26-port solve.
 
-## Final ADC digital PowerSI package
+## ADC digital PowerSI setup
 
-The final PowerSI-ready SPD package is structurally validated.
+The current 26-port SPD package passes structural validation.
 
-The committed validation file records:
+`verification/si_pi/POWERSI_26PORT_VALIDATION.txt` records:
 
 - all expected stack layers present;
 - 1597.7938 µm total stack thickness;
@@ -46,27 +46,25 @@ The committed validation file records:
 
 The port set covers the AD9655 D0A, D0B, D1A, D1B and DCO pairs, corresponding switched/terminated endpoints, and the J9 AUX endpoint.
 
-### Digital-SI status
+### Remaining PowerSI work
 
-**OPEN — solver run required.**
+The final 26-port numerical solve is pending. The required sequence is:
 
-The validation artifact explicitly states that the final SPD is structurally ready but the final 26-port PowerSI solve has not yet been accepted. Closure requires:
-
-1. solve the supplied final 26-port SPD;
+1. solve the current 26-port SPD;
 2. export S26P in RI, 50 Ω, single-ended form;
 3. export the companion CKT;
 4. check numerical validity;
 5. check passivity and reciprocity;
-6. convert/check the required mixed-mode insertion/return-loss paths;
+6. convert/check the required mixed-mode insertion and return-loss paths;
 7. evaluate DCO/data-lane transmission and crosstalk over the relevant spectrum.
 
-The setup validation and manifest are committed under `verification/si_pi/`.
+The setup parameters are in `verification/si_pi/POWERSI_26PORT_SETUP.txt`.
 
-## Existing PowerDC evidence
+## Existing PowerDC results
 
-The committed screenshots show the previously solved board-power model and are useful as baseline evidence for source/sink voltage and rail distribution. They are not represented as the final AWG-loaded result.
+The committed screenshots show the previously solved board-power model and provide baseline source/sink voltage and rail-distribution results. They predate the finalized AWG load set.
 
-The baseline load table includes, among other loads:
+The baseline load table includes:
 
 - AD9655 1.8 V analog/digital-equivalent loads;
 - clock rail load;
@@ -74,18 +72,18 @@ The baseline load table includes, among other loads:
 - AFE and switch loads;
 - the historical LM27762-equivalent input sink of 0.255 A.
 
-The exact baseline table is committed as `verification/si_pi/POWERDC_LOADS_BASELINE.csv`.
+The exact baseline table is `verification/si_pi/POWERDC_LOADS_BASELINE.csv`.
 
-## Final AWG PowerDC update
+## AWG PowerDC load update
 
-The final AWG update adds/changes the following schematic-level loads:
+The finalized AWG update adds or changes:
 
 - U13 AD9102: 30 mA from PYNQ_3V3;
 - Y2 125 MHz LVDS oscillator: 27 mA from CLK3V3;
 - U12 ADA4817-2 AWG output amplifier: conservative 22 mA device current, represented on both split-supply rails as appropriate;
-- LM27762-equivalent CP_3V3 input load: update from 0.255 A to 0.277 A because the negative-rail load rises.
+- LM27762-equivalent CP_3V3 input load: 0.255 A to 0.277 A because the negative-rail load rises.
 
-The planning totals in the supplied update are approximately:
+Planning totals from the update:
 
 - CP_3V3 / FL1: 0.277 A;
 - CLK3V3 / FL3: 0.054 A;
@@ -93,13 +91,11 @@ The planning totals in the supplied update are approximately:
 - positive analog rail: 0.084 A;
 - total PYNQ_3V3 demand: approximately 0.708 A.
 
-The 0.708 A value is explicitly a **planning estimate**, not a solved copper-distribution result.
+The 0.708 A value is a planning estimate, not a solved copper-distribution result.
 
-### Power-integrity status
+### Remaining PowerDC work
 
-**OPEN — final PowerDC solve required.**
-
-The final solve must record at minimum:
+A new solve with the finalized AWG loads is pending. Record at minimum:
 
 - PYNQ_3V3 minimum voltage;
 - CLK3V3 minimum voltage;
@@ -111,16 +107,14 @@ The final solve must record at minimum:
 - maximum via current;
 - total conductive PCB loss.
 
-## Hardware closure after fabrication
+## Measurements after fabrication
 
-The pre-fabrication model must eventually be correlated with:
+Hardware measurements will cover:
 
 - rail DC accuracy and ripple;
 - startup sequencing;
 - 125 MHz clock amplitude/jitter;
-- ADC DCO/data eye or timing margin;
+- ADC DCO/data timing margin;
 - FFT/noise-floor behavior;
 - simultaneous acquisition + AWG supply interaction;
-- thermal behavior at sustained load.
-
-These are intentionally left as hardware gates rather than inferred from simulation.
+- sustained-load thermal behavior.

@@ -1,6 +1,6 @@
-# Results and Evidence Index
+# Results Index
 
-This page is the navigation index for numerical, graphical and solver evidence. For gate status, see `12_prefabrication_signoff_matrix.md`.
+This page indexes the numerical tables, plots, source simulation data, and SI/PI setup files used by the current Rev. A documentation.
 
 ## Analog frequency response
 
@@ -10,21 +10,19 @@ Primary figures:
 - `AFE_FAST_relative_transfer.png`
 - `AFE_FAST_vs_DUAL_CH1.png`
 
-Exact V7 acceptance metrics:
+Numeric tables:
 
-- `verification/results/AC_SIGNOFF_METRICS.csv`
+- `verification/results/AC_RESPONSE_METRICS.csv`
 - `verification/results/AC_COUPLING_METRICS.csv`
 - `verification/results/ANALOG_GSPICE_V7_RUN_STATUS.csv`
 
-## README verification-summary plots
+## README verification plots
 
-These figures are presentation views derived directly from the committed result tables; the CSV files remain canonical.
+These figures are derived directly from the committed numerical tables:
 
-- `VERIFICATION_AFE_bandwidth_consistency.svg` — summarizes the `-3 dB` bandwidth spread across all 16 loaded AC signoff cases from `AC_SIGNOFF_METRICS.csv`.
-- `VERIFICATION_AD9655_system_sinad.svg` — compares ADC-only and modeled AFE+ADC SINAD across DUAL/HIGH, DUAL/LOW, FAST/HIGH and FAST/LOW using `AD9655_SIGNOFF_SUMMARY.csv`.
-- `VERIFICATION_range_transfer_diagnostic.svg` — visualizes the OPEN HIGH/LOW range-transfer discrepancy from `RANGE_TRANSFER_KEY_POINTS.csv`.
-
-The range-transfer plot is intentionally included in the main README even though it is an OPEN gate. The repository does not suppress negative or unresolved evidence.
+- `VERIFICATION_AFE_bandwidth_consistency.svg` — `-3 dB` bandwidth spread across all 16 loaded AC cases.
+- `VERIFICATION_AD9655_system_sinad.svg` — ADC-only versus modeled AFE+ADC SINAD.
+- `VERIFICATION_range_transfer_diagnostic.svg` — extracted HIGH/LOW range scaling compared with the schematic reference.
 
 ## High-frequency transients
 
@@ -42,14 +40,14 @@ Common-mode plots:
 - `TRANSIENT_HIGH_FAST_40MHz_common_mode.svg`
 - `TRANSIENT_HIGH_DUAL_20MHz_common_mode.svg`
 
-Combined presentation:
+Combined view:
 
 - `transient_matrix_differential.png`
 - `transient_matrix_differential.pdf`
 
-The current plotting policy is to use the entire time interval present in each raw CSV rather than cropping all cases to 200 ns. `TRANSIENT_PLOT_WINDOWS.csv` is generated with the plots and records the exact window used.
+`TRANSIENT_PLOT_WINDOWS.csv` records the exact source file and plotted time interval.
 
-Canonical raw sources:
+Raw transient sources:
 
 - `verification/raw/afe/transient/trans(20260903-220723).csv` — LOW FAST;
 - `verification/raw/afe/transient/trans(20260904-072702).csv` — LOW DUAL;
@@ -58,20 +56,20 @@ Canonical raw sources:
 
 Numerical transient summary:
 
-- `verification/results/COMPUTED_METRICS.csv`.
+- `verification/results/COMPUTED_METRICS.csv`
 
 ## ADC/noise model
 
-- `verification/results/AD9655_SIGNOFF_SUMMARY.csv`
+- `verification/results/AD9655_PERFORMANCE_SUMMARY.csv`
 
-This file reports the ADC-only and AFE+ADC modeled SNR/SINAD/ENOB values and the AFE noise contribution used by the pre-fabrication model.
+This table reports ADC-only and AFE+ADC modeled SNR/SINAD/ENOB values together with the AFE noise contribution used by the pre-fabrication model.
 
-## Range-transfer root-cause evidence
+## HIGH/LOW range-transfer analysis
 
 - `verification/results/RANGE_TRANSFER_KEY_POINTS.csv`
 - `verification/results/FULL222_VS_MERGED_S47P.csv`
 
-These files support the OPEN range-scaling gate. They are retained even though the anti-alias filter matrix itself passes.
+The extracted source network and larger extracted model agree closely at the checked frequencies. The difference from the schematic-reference HIGH/LOW scaling still requires further analysis.
 
 ## Waveform generator
 
@@ -82,27 +80,27 @@ Figures:
 - `AWG_1MHz_BNC_transient.png`
 - `AWG_1MHz_output_stage.png`
 
-Current simulated summary:
+Current simulated values:
 
-- approximately 84.7425 MHz post-layout -3 dB bandwidth;
+- approximately 84.7425 MHz post-layout `-3 dB` bandwidth;
 - approximately 1.598 Vpp at the modeled 50 Ω BNC for the 1 MHz transient;
 - approximately 3.199 Vpp at the output-amplifier side before the modeled 50 Ω division.
 
 ## Signal integrity
 
-Setup/provenance:
+Setup files:
 
 - `verification/si_pi/POWERSI_26PORT_VALIDATION.txt`
-- `verification/si_pi/POWERSI_26PORT_MANIFEST.txt`
+- `verification/si_pi/POWERSI_26PORT_SETUP.txt`
 
-The 26-port SPD is structurally validated but the final S26P solver result remains OPEN.
+The 26-port SPD passes structural validation. The final S26P numerical solve is pending.
 
 ## Power integrity
 
 - `verification/si_pi/POWERDC_LOADS_BASELINE.csv`
 - `verification/si_pi/POWERDC_FINAL_AWG_UPDATE.txt`
 
-The existing PowerDC screenshots remain baseline evidence. The final AWG-loaded PowerDC solve remains OPEN.
+The current screenshots correspond to the earlier solved load set. A new PowerDC run with the finalized AWG loads is pending.
 
 ## Raw simulation directories
 
@@ -110,6 +108,4 @@ The existing PowerDC screenshots remain baseline evidence. The final AWG-loaded 
 - `verification/raw/afe/transient/`
 - `verification/raw/awg/`
 
-## Interpretation rule
-
-A committed plot is evidence only for the source data and model state from which it was generated. Simulated, extracted, structurally validated, and measured results are deliberately labelled separately throughout this repository.
+Simulation, extracted-network, setup-validation, and future measured results are labeled separately throughout the repository.
