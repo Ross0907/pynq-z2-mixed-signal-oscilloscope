@@ -1,0 +1,82 @@
+PYNQ-Z2 OSCILLOSCOPE FINAL 26-PORT POWERSI READY VALIDATION
+==================================================================
+Base geometry: fucntiongentoo(2).spd
+Historical proven graph repair source: Pynq_Oscilloscope_AUX_D1B_26PORT_GRAPH_FIXED_D0B_FINAL.spd
+Output: Pynq_Oscilloscope_FINAL_26PORT_POWERSI_READY_20260905.spd
+SHA256: 5c4c8c1a1cb24af58b36b91482a480106977596e0431f43a863b9ced1af8a77d
+
+PASS  stack layer F_MASK found
+PASS  stack layer F_CU found
+PASS  stack layer DIELECTRIC_1 found
+PASS  stack layer IN1_CU found
+PASS  stack layer DIELECTRIC_2 found
+PASS  stack layer IN2_CU found
+PASS  stack layer DIELECTRIC_3 found
+PASS  stack layer B_CU found
+PASS  stack layer B_MASK found
+PASS  stack total = 1597.7938 um
+PASS  node IDs unique
+PASS  trace IDs unique
+PASS  port block present
+PASS  26 ports present (26)
+PASS  all port terminal nodes exist (96 refs)
+PASS  J9 AUX ports renamed
+PASS  J9 ports use physical pad nodes
+PASS  10 mOhm partial circuit present
+PASS  repair part definition present
+PASS  15 repair components present (15)
+PASS  14 repair traces present (14)
+PASS  all repair resistor endpoints are same-net
+PASS  all repair trace endpoints are same-net
+PASS  PowerSI causality enabled
+PASS  PowerSI sweep 1 MHz to 10 GHz, 1001 Log
+PASS  50 ohm reference
+PASS  port/native mapping max displacement = 0.002236 mm
+
+Corrected stackup (um):
+  F_MASK            10.0000
+  F_CU              34.2646
+  DIELECTRIC_1     100.0000
+  IN1_CU            17.1323
+  DIELECTRIC_2    1275.0000
+  IN2_CU            17.1323
+  DIELECTRIC_3     100.0000
+  B_CU              34.2646
+  B_MASK            10.0000
+  TOTAL           1597.7938
+
+Ports:
+  P01_IC2_D0A_P
+  P02_IC2_D0A_N
+  P03_IC2_D0B_P
+  P04_IC2_D0B_N
+  P05_IC2_D1A_P
+  P06_IC2_D1A_N
+  P07_IC2_D1B_P
+  P08_IC2_D1B_N
+  P09_IC2_DCO_P
+  P10_IC2_DCO_N
+  P11_U9_D1A_P
+  P12_U9_D1A_N
+  P13_U9_D1B_P
+  P14_U9_D1B_N
+  P15_U9_D1X_P
+  P16_U9_D1X_N
+  P17_R67_D0A_P
+  P18_R68_D0A_N
+  P19_R63_D0B_P
+  P20_R64_D0B_N
+  P21_R61_DCO_P
+  P22_R62_DCO_N
+  P23_R65_D1X_P
+  P24_R66_D1X_N
+  P25_J9_D1B_P
+  P26_J9_D1B_N
+
+Native node remap maximum displacement: 0.002236 mm
+  Node1579!!2::D1B+ -> Node9231!!2::D1B+ : 0.002236 mm
+  Node1636!!1::D1B- -> Node9232!!1::D1B- : 0.002236 mm
+  Node8150!!4::GND -> Node9236!!4::GND : 0.002236 mm
+  Node8151!!3::GND -> Node9237!!3::GND : 0.002236 mm
+
+IMPORTANT: This file has been structurally validated but must still be solved in Cadence PowerSI. No claim is made that a new S26P result is valid until the solver run completes and the exported Touchstone is checked.

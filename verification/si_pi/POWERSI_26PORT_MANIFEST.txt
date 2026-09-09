@@ -1,0 +1,27 @@
+PYNQ-Z2 OSCILLOSCOPE FINAL POWERSI RUN MANIFEST
+
+Input/frozen board geometry:
+  Pynq_Oscilloscope(20260904-235630).zip
+  Pynq_Oscilloscope-odb(9).zip
+
+Use the supplied SPD:
+  Pynq_Oscilloscope_FINAL_26PORT_POWERSI_READY_20260905.spd
+
+PowerSI settings embedded:
+  Reference impedance: 50 ohm
+  Causality: ON
+  Sweep: 1 MHz to 10 GHz, 1001 Log
+  Mixed mode: OFF
+  26 single-ended ports, including J9 D1B+/- AUX endpoint
+  Historical D0B-/D1A-/D1B- Sigrity solver-graph continuity repairs remapped to the final ODB geometry
+
+Export after solve:
+  Touchstone S-parameter
+  RI
+  50 ohm
+  Mixed mode OFF
+  Touchstone 2.0 OFF
+  Passivity enforcement OFF
+  Also export .CKT
+
+Send the resulting .S26P + .CKT back for final numerical/passivity/reciprocity/mixed-mode validation.

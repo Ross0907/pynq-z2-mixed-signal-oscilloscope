@@ -1,0 +1,73 @@
+PYNQ-Z2 OSCILLOSCOPE / MDO — FINAL AWG POWERDC UPDATE
+=====================================================
+Frozen PCB baseline:
+  Pynq_Oscilloscope(20260904-235630).zip
+  Pynq_Oscilloscope-odb(9).zip
+
+Previous accepted PowerDC baseline:
+  Total PYNQ_3V3 draw        = 0.607028 A
+  FL1 / CP_3V3               = 0.255 A
+  FL3 / CLK3V3               = 0.027 A
+  LM27762 +3V0 output        = 0.084 A
+  LM27762 -2V0 output        = 0.170 A
+
+Add the following AWG loads:
+
+1) U13 AD9102
+   Rail: PYNQ_3V3
+   PowerDC sink: 0.030 A
+   Rationale: conservative rounded value; ADI quotes 96.54 mW at 3.3 V,
+   180 MSPS and 4 mA output (~29.3 mA total). Final design is only
+   125 MSPS and ~2 mA full-scale, so 30 mA is conservative.
+
+2) Y2 AK5DAF1 125 MHz LVDS oscillator
+   Rail: CLK3V3
+   PowerDC sink: 0.027 A
+
+3) U12 ADA4817-2 AWG output amplifier
+   Channel A active, channel B powered down.
+   Use conservative combined device current = 0.022 A.
+
+   PYNQ_3V3 sink: 0.022 A
+   -2V0 sink:     0.022 A
+
+   Do not halve this current between positive and negative rails: the same
+   split-supply device current flows through both supply rails.
+
+4) Update the LM27762 equivalent input load used by the existing manual
+   PowerDC model because -2V0 now carries the extra U12 current.
+
+   Existing:
+     +3V0 load 84 mA + -2V0 load 170 mA + ~1 mA overhead = 255 mA
+
+   New:
+     +3V0 load 84 mA + -2V0 load 192 mA + ~1 mA overhead = 277 mA
+
+   Therefore:
+     SINK_U4_CP_3V3_GND = 0.277 A
+     U4 -2V0 output load total = 0.192 A
+     U4 +3V0 output load total = 0.084 A (unchanged)
+
+Expected approximate new board totals before solving copper distribution:
+  FL1 / CP_3V3        ~0.277 A
+  FL3 / CLK3V3        ~0.054 A
+  -2V0 total          ~0.192 A
+  +3V0 total           0.084 A
+  total PYNQ_3V3      ~0.708 A
+
+The ~0.708 A figure is a planning estimate only. Final J3/J5 current sharing,
+rail minima, trace/via current density and copper loss must come from the
+new PowerDC solve on the final ODB geometry.
+
+Recommended post-run values to record:
+  PYNQ_3V3 minimum voltage
+  CLK3V3 minimum voltage
+  CP_3V3 minimum voltage
+  -2V0 worst/most-positive voltage
+  J3 current
+  J5 current
+  FL1 current
+  FL3 current
+  maximum trace current density
+  maximum via current
+  total PCB conductive loss
