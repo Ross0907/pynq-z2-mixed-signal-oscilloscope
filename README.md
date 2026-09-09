@@ -1,7 +1,8 @@
 # PYNQ-Z2 Mixed-Signal Oscilloscope / MDO
 
 <p align="center">
-  <img src="docs/assets/hardware/hero_pcb_render.png" width="920" alt="PYNQ-Z2 MDO mixed-signal oscilloscope PCB render">
+  <img src="docs/assets/hardware/pcb_render.png" width="48%" alt="PYNQ-Z2 MDO mixed-signal oscilloscope PCB render">
+  <img src="docs/assets/hardware/pcb_render_top.png" width="48%" alt="PYNQ-Z2 MDO mixed-signal oscilloscope PCB render">
 </p>
 
 A custom **dual-channel 16-bit mixed-signal oscilloscope, logic-analyzer interface, and arbitrary-waveform/function-generator platform** designed around the **PYNQ-Z2**, **AD9655**, **AD9102**, **ADA4927-2**, and **ADA4817-2**.
