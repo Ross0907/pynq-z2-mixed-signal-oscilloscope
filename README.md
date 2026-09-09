@@ -171,31 +171,31 @@ The two anti-alias paths align the analog bandwidth with the corresponding acqui
 
 The transient set spans both input ranges and both acquisition modes. Each plot shows the fully differential amplifier output together with the differential voltage presented to the ADC input.
 
-LOW and HIGH range plots share the same time scale within each acquisition mode. The DUAL plots use a longer window so the post-settling response is clearly visible, while the FAST pair retains a matched FAST time scale.
+LOW and HIGH range plots share the same time scale within each acquisition mode. The DUAL plots use a longer window so the post-settling response is clearly visible, while the FAST pair retains a matched FAST time scale. Blue: FDA differential output. Orange: loaded ADC differential input.
 
 
 <table>
 <tr>
 <td width="50%" valign="top" align="center">
-<strong>LOW RANGE Â· FAST MODE Â· 40 MHz</strong><br>
-<sub>40 MHz input through the FAST acquisition path. Blue: FDA differential output. Orange: loaded ADC differential input. Startup settling and steady periodic response are shown on the matched FAST time scale.</sub><br><br>
+<strong>LOW RANGE · FAST MODE · 40 MHz</strong><br>
+<sub>40 MHz input through the FAST acquisition path.</sub><br><br>
 <img src="docs/assets/plots/TRANSIENT_LOW_FAST_40MHz_differential.svg" width="100%" alt="Low range FAST mode 40 MHz transient">
 </td>
 <td width="50%" valign="top" align="center">
-<strong>LOW RANGE Â· DUAL MODE Â· 20 MHz</strong><br>
-<sub>20 MHz input through the simultaneous DUAL acquisition path. The longer DUAL time scale makes the ADC-input settling and subsequent periodic response easy to see.</sub><br><br>
+<strong>LOW RANGE · DUAL MODE · 20 MHz</strong><br>
+<sub>20 MHz input through the simultaneous DUAL acquisition path.</sub><br><br>
 <img src="docs/assets/plots/TRANSIENT_LOW_DUAL_20MHz_differential.svg" width="100%" alt="Low range DUAL mode 20 MHz transient">
 </td>
 </tr>
 <tr>
 <td width="50%" valign="top" align="center">
 <strong>HIGH RANGE Â· FAST MODE Â· 40 MHz</strong><br>
-<sub>40 MHz FAST-path response in HIGH range. It uses the same FAST time scale as the LOW-range FAST plot for direct visual comparison.</sub><br><br>
+<sub>40 MHz FAST-path response in HIGH range.</sub><br><br>
 <img src="docs/assets/plots/TRANSIENT_HIGH_FAST_40MHz_differential.svg" width="100%" alt="High range FAST mode 40 MHz transient">
 </td>
 <td width="50%" valign="top" align="center">
 <strong>HIGH RANGE Â· DUAL MODE Â· 20 MHz</strong><br>
-<sub>20 MHz DUAL-path response in HIGH range. It uses the same longer DUAL time scale as the LOW-range DUAL plot, exposing the settled portion of the waveform.</sub><br><br>
+<sub>20 MHz DUAL-path response in HIGH range.</sub><br><br>
 <img src="docs/assets/plots/TRANSIENT_HIGH_DUAL_20MHz_differential.svg" width="100%" alt="High range DUAL mode 20 MHz transient">
 </td>
 </tr>
