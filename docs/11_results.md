@@ -16,6 +16,16 @@ Exact V7 acceptance metrics:
 - `verification/results/AC_COUPLING_METRICS.csv`
 - `verification/results/ANALOG_GSPICE_V7_RUN_STATUS.csv`
 
+## README verification-summary plots
+
+These figures are presentation views derived directly from the committed result tables; the CSV files remain canonical.
+
+- `VERIFICATION_AFE_bandwidth_consistency.svg` — summarizes the `-3 dB` bandwidth spread across all 16 loaded AC signoff cases from `AC_SIGNOFF_METRICS.csv`.
+- `VERIFICATION_AD9655_system_sinad.svg` — compares ADC-only and modeled AFE+ADC SINAD across DUAL/HIGH, DUAL/LOW, FAST/HIGH and FAST/LOW using `AD9655_SIGNOFF_SUMMARY.csv`.
+- `VERIFICATION_range_transfer_diagnostic.svg` — visualizes the OPEN HIGH/LOW range-transfer discrepancy from `RANGE_TRANSFER_KEY_POINTS.csv`.
+
+The range-transfer plot is intentionally included in the main README even though it is an OPEN gate. The repository does not suppress negative or unresolved evidence.
+
 ## High-frequency transients
 
 Differential plots:
