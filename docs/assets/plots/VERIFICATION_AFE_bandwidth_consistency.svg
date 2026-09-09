@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="450" viewBox="0 0 900 450">
+<rect width="900" height="450" fill="white"/>
+<g font-family="Arial,Helvetica,sans-serif" fill="#111">
+  <text x="450" y="34" text-anchor="middle" font-size="23" font-weight="700">Analog filter bandwidth consistency</text>
+  <text x="450" y="58" text-anchor="middle" font-size="14">All 16 loaded AC signoff runs PASS</text>
+  <text x="82" y="225" text-anchor="middle" font-size="15" transform="rotate(-90 82 225)">−3 dB bandwidth (MHz)</text>
+  <line x1="120" y1="380" x2="850" y2="380" stroke="#222" stroke-width="1.5"/>
+  <line x1="120" y1="85" x2="120" y2="380" stroke="#222" stroke-width="1.5"/>
+  <g font-size="12" fill="#444">
+    <line x1="120" y1="380" x2="850" y2="380" stroke="#ddd"/><text x="108" y="384" text-anchor="end">20</text>
+    <line x1="120" y1="313" x2="850" y2="313" stroke="#ddd"/><text x="108" y="317" text-anchor="end">25</text>
+    <line x1="120" y1="246" x2="850" y2="246" stroke="#ddd"/><text x="108" y="250" text-anchor="end">30</text>
+    <line x1="120" y1="179" x2="850" y2="179" stroke="#ddd"/><text x="108" y="183" text-anchor="end">35</text>
+    <line x1="120" y1="112" x2="850" y2="112" stroke="#ddd"/><text x="108" y="116" text-anchor="end">40</text>
+  </g>
+  <text x="320" y="415" text-anchor="middle" font-size="16">DUAL 20 MHz path</text>
+  <text x="650" y="415" text-anchor="middle" font-size="16">FAST 40 MHz path</text>
+  <line x1="235" y1="353.6" x2="405" y2="353.3" stroke="#222" stroke-width="3"/>
+  <line x1="565" y1="97.8" x2="735" y2="96.7" stroke="#222" stroke-width="3"/>
+  <g fill="white" stroke="#111" stroke-width="2">
+    <circle cx="252" cy="353.6" r="6"/><circle cx="272" cy="353.6" r="6"/><circle cx="292" cy="353.3" r="6"/><circle cx="312" cy="353.3" r="6"/>
+    <circle cx="332" cy="353.6" r="6"/><circle cx="352" cy="353.3" r="6"/><circle cx="372" cy="353.6" r="6"/><circle cx="392" cy="353.3" r="6"/>
+    <circle cx="582" cy="97.8" r="6"/><circle cx="602" cy="96.7" r="6"/><circle cx="622" cy="97.8" r="6"/><circle cx="642" cy="96.7" r="6"/>
+    <circle cx="662" cy="97.8" r="6"/><circle cx="682" cy="96.7" r="6"/><circle cx="702" cy="97.8" r="6"/><circle cx="722" cy="96.7" r="6"/>
+  </g>
+  <text x="320" y="338" text-anchor="middle" font-size="15" font-weight="700">21.955–21.978 MHz</text>
+  <text x="650" y="129" text-anchor="middle" font-size="15" font-weight="700">41.011–41.091 MHz</text>
+  <text x="450" y="442" text-anchor="middle" font-size="11" fill="#666">Source: verification/results/AC_SIGNOFF_METRICS.csv</text>
+</g>
+</svg>
