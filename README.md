@@ -171,14 +171,8 @@ The two anti-alias paths align the analog bandwidth with the corresponding acqui
 
 The transient set spans both input ranges and both acquisition modes. Each plot shows the fully differential amplifier output together with the differential voltage presented to the ADC input.
 
-The figures use the **entire committed source record**. No waveform data is extrapolated, repeated, or synthesized.
+The four differential transient figures use a common time scale for direct visual comparison. The displayed samples come directly from the committed PSpice exports; no waveform data is extrapolated, repeated, or synthesized.
 
-| Case | Exact plotted interval |
-|---|---:|
-| LOW / FAST / 40 MHz | 0–280.370 ns |
-| LOW / DUAL / 20 MHz | 0–500.000 ns |
-| HIGH / FAST / 40 MHz | 0–750.000 ns |
-| HIGH / DUAL / 20 MHz | 0–334.055 ns |
 
 <p align="center">
   <img src="docs/assets/plots/TRANSIENT_LOW_FAST_40MHz_differential.svg" width="48%" alt="Low range FAST mode transient">
@@ -190,7 +184,7 @@ The figures use the **entire committed source record**. No waveform data is extr
   <img src="docs/assets/plots/TRANSIENT_HIGH_DUAL_20MHz_differential.svg" width="48%" alt="High range DUAL mode transient">
 </p>
 
-Common-mode behavior was evaluated separately at the FDA output and at the loaded ADC input. Exact plot windows are recorded in [`verification/results/TRANSIENT_PLOT_WINDOWS.csv`](verification/results/TRANSIENT_PLOT_WINDOWS.csv), and the source CSVs are under [`verification/raw/afe/transient/`](verification/raw/afe/transient/).
+Common-mode behavior was evaluated separately at the FDA output and at the loaded ADC input. The source CSVs are under [`verification/raw/afe/transient/`](verification/raw/afe/transient/).
 
 ---
 

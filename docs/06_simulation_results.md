@@ -33,16 +33,15 @@ All eight range/mode/channel AC-coupling cases pass. The extracted high-pass cor
 
 The committed PSpice source exports are:
 
-| Case | Source CSV | Plot interval |
-|---|---|---:|
-| LOW / FAST / 40 MHz | `trans(20260903-220723).csv` | 0–280.370 ns |
-| LOW / DUAL / 20 MHz | `trans(20260904-072702).csv` | 0–500.000 ns |
-| HIGH / FAST / 40 MHz | `trans(20260904-084345).csv` | 0–750.000 ns |
-| HIGH / DUAL / 20 MHz | `trans(20260904-074916).csv` | 0–334.055 ns |
+| Case | Source CSV |
+|---|---|
+| LOW / FAST / 40 MHz | `trans(20260903-220723).csv` |
+| LOW / DUAL / 20 MHz | `trans(20260904-072702).csv` |
+| HIGH / FAST / 40 MHz | `trans(20260904-084345).csv` |
+| HIGH / DUAL / 20 MHz | `trans(20260904-074916).csv` |
 
 The figures use the full available source record. No waveform data is extrapolated, repeated, or synthesized. The differential plots use a common ±1.7 V Y-axis for direct visual comparison.
 
-`verification/results/TRANSIENT_PLOT_WINDOWS.csv` records the exact source file and plotted interval for each case.
 
 ### Settled differential metrics
 

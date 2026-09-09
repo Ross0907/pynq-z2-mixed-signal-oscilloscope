@@ -45,7 +45,6 @@ Combined view:
 - `transient_matrix_differential.png`
 - `transient_matrix_differential.pdf`
 
-`TRANSIENT_PLOT_WINDOWS.csv` records the exact source file and plotted time interval.
 
 Raw transient sources:
 
