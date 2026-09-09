@@ -1,28 +1,20 @@
-# KiCad temporary/backup files
+# KiCad generated files
 *-backups/
 *.lck
 *.tmp
 ~*
 
-# Local evidence-generation / conversion tooling
+# Local tools and caches
 /tools/
-PUBLISH_NEW_GITHUB_REPO.bat
-COLLECT_PYNQ_*.bat
-COLLECT_PYNQ_*.ps1
-REMOVE_ACCIDENTAL_DOWNLOADS_GIT.bat
-
-# MATLAB temporary files
 *.asv
-
-# Python temporary files
 __pycache__/
 *.pyc
 
-# OS/editor
+# Editor and operating-system files
 Thumbs.db
 .DS_Store
 .vscode/
 .idea/
 
-# Local measurement dumps not deliberately curated
+# Local measurement data
 measurements/local/

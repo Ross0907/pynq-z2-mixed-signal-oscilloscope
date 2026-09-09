@@ -44,12 +44,9 @@ The extracted source network shows HIGH/LOW separation falling to roughly 2.1–
 
 The investigation is centered on the schematic range relay/attenuator/compensation networks K1/K2 and their associated resistor-capacitor networks.
 
-## 6. Transient figures were cropped too early
+## 6. Transient display window
 
-The first figures displayed only 0–200 ns even though the committed raw transient CSVs are longer. For the DUAL cases in particular, the ADC waveform is still approaching periodic steady state within that interval.
-
-The current figures use the full available source record for every case. No waveform samples are synthesized, repeated, or extrapolated.
-
+The original 0â€“200 ns figures did not show enough of the DUAL-mode settling behavior. The current plots use matched LOW/HIGH time scales within each acquisition mode, with a longer DUAL interval so the steady periodic response is visible.
 ## 7. PowerDC baseline became stale after the AWG was finalized
 
 The existing PowerDC screenshots predate the finalized AWG load update. The load update adds the AD9102, AWG clock, output amplifier, and increased LM27762-equivalent input demand.

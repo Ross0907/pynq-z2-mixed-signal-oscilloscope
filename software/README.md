@@ -1,3 +1,3 @@
 # Software
 
-Host and control software for the standalone oscilloscope can be developed here. Hardware simulation data and future measured data remain under the dedicated project directories.
+Host software scope includes instrument configuration, acquisition control, trigger setup, waveform-generator control, data transfer, and visualization for the PYNQ-Z2 oscilloscope/MDO.

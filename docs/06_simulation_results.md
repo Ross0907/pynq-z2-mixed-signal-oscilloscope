@@ -31,7 +31,7 @@ All eight range/mode/channel AC-coupling cases pass. The extracted high-pass cor
 
 ## High-frequency transients
 
-The committed PSpice source exports are:
+PSpice transient datasets:
 
 | Case | Source CSV |
 |---|---|
@@ -78,7 +78,7 @@ These are modeled results, not hardware measurements.
 
 ## AWG analog-path results
 
-The AD9102/output path has a committed 1 MHz transient result and post-layout AC response.
+The AD9102/output path has a 1 MHz transient result and post-layout AC response.
 
 Current values:
 

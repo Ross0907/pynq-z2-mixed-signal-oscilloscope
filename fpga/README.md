@@ -1,5 +1,3 @@
 # FPGA
 
-This standalone repository intentionally does not import the previous fork's code automatically.
-
-Place the project-owned PYNQ-Z2/AD9655 acquisition RTL here when it is ready for release. Keep third-party source and license boundaries explicit.
+FPGA scope includes AD9655 source-synchronous capture, FAST/DUAL acquisition control, triggering, buffering, logic-analyzer interfacing, clock-domain handling, and host data transfer on the PYNQ-Z2 XC7Z020.

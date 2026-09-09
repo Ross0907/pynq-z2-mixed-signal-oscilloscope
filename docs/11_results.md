@@ -18,7 +18,7 @@ Numeric tables:
 
 ## README verification plots
 
-These figures are derived directly from the committed numerical tables:
+These figures are derived directly from the numerical tables:
 
 - `VERIFICATION_AFE_bandwidth_consistency.svg` — `-3 dB` bandwidth spread across all 16 loaded AC cases.
 - `VERIFICATION_AD9655_system_sinad.svg` — ADC-only versus modeled AFE+ADC SINAD.

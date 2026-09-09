@@ -62,7 +62,7 @@ The setup parameters are in `verification/si_pi/POWERSI_26PORT_SETUP.txt`.
 
 ## Existing PowerDC results
 
-The committed screenshots show the previously solved board-power model and provide baseline source/sink voltage and rail-distribution results. They predate the finalized AWG load set.
+The screenshots show the previously solved board-power model and provide baseline source/sink voltage and rail-distribution results. They predate the finalized AWG load set.
 
 The baseline load table includes:
 

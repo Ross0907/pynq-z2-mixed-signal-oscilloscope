@@ -171,20 +171,37 @@ The two anti-alias paths align the analog bandwidth with the corresponding acqui
 
 The transient set spans both input ranges and both acquisition modes. Each plot shows the fully differential amplifier output together with the differential voltage presented to the ADC input.
 
-Within each acquisition mode, the LOW and HIGH range transient figures use the same time scale for direct visual comparison. The DUAL pair uses the longest common DUAL record available from the committed PSpice exports, while the FAST pair uses the longest common FAST record. No waveform data is extrapolated, repeated, or synthesized.
+LOW and HIGH range plots share the same time scale within each acquisition mode. The DUAL plots use a longer window so the post-settling response is clearly visible, while the FAST pair retains a matched FAST time scale.
 
 
-<p align="center">
-  <img src="docs/assets/plots/TRANSIENT_LOW_FAST_40MHz_differential.svg" width="48%" alt="Low range FAST mode transient">
-  <img src="docs/assets/plots/TRANSIENT_LOW_DUAL_20MHz_differential.svg" width="48%" alt="Low range DUAL mode transient">
-</p>
+<table>
+<tr>
+<td width="50%" valign="top" align="center">
+<strong>LOW RANGE Â· FAST MODE Â· 40 MHz</strong><br>
+<sub>40 MHz input through the FAST acquisition path. Blue: FDA differential output. Orange: loaded ADC differential input. Startup settling and steady periodic response are shown on the matched FAST time scale.</sub><br><br>
+<img src="docs/assets/plots/TRANSIENT_LOW_FAST_40MHz_differential.svg" width="100%" alt="Low range FAST mode 40 MHz transient">
+</td>
+<td width="50%" valign="top" align="center">
+<strong>LOW RANGE Â· DUAL MODE Â· 20 MHz</strong><br>
+<sub>20 MHz input through the simultaneous DUAL acquisition path. The longer DUAL time scale makes the ADC-input settling and subsequent periodic response easy to see.</sub><br><br>
+<img src="docs/assets/plots/TRANSIENT_LOW_DUAL_20MHz_differential.svg" width="100%" alt="Low range DUAL mode 20 MHz transient">
+</td>
+</tr>
+<tr>
+<td width="50%" valign="top" align="center">
+<strong>HIGH RANGE Â· FAST MODE Â· 40 MHz</strong><br>
+<sub>40 MHz FAST-path response in HIGH range. It uses the same FAST time scale as the LOW-range FAST plot for direct visual comparison.</sub><br><br>
+<img src="docs/assets/plots/TRANSIENT_HIGH_FAST_40MHz_differential.svg" width="100%" alt="High range FAST mode 40 MHz transient">
+</td>
+<td width="50%" valign="top" align="center">
+<strong>HIGH RANGE Â· DUAL MODE Â· 20 MHz</strong><br>
+<sub>20 MHz DUAL-path response in HIGH range. It uses the same longer DUAL time scale as the LOW-range DUAL plot, exposing the settled portion of the waveform.</sub><br><br>
+<img src="docs/assets/plots/TRANSIENT_HIGH_DUAL_20MHz_differential.svg" width="100%" alt="High range DUAL mode 20 MHz transient">
+</td>
+</tr>
+</table>
 
-<p align="center">
-  <img src="docs/assets/plots/TRANSIENT_HIGH_FAST_40MHz_differential.svg" width="48%" alt="High range FAST mode transient">
-  <img src="docs/assets/plots/TRANSIENT_HIGH_DUAL_20MHz_differential.svg" width="48%" alt="High range DUAL mode transient">
-</p>
-
-Common-mode behavior was evaluated separately at the FDA output and at the loaded ADC input. The source CSVs are under [`verification/raw/afe/transient/`](verification/raw/afe/transient/).
+Common-mode behavior was evaluated separately at the FDA output and at the loaded ADC input.
 
 ---
 
@@ -304,7 +321,7 @@ Raw simulation data and derived quantitative result tables are under [`verificat
 
 Physical measurements begin after board fabrication. The characterization set covers input bandwidth, passband flatness, vertical gain and offset, channel matching, channel skew, ADC SNR/SINAD/ENOB/SFDR, timebase accuracy, AWG amplitude flatness and spectral purity, end-to-end AWG-to-ADC loopback, rail quality, and sustained-load thermal behavior.
 
-Those measurements are intentionally separate from the pre-fabrication simulation figures shown in this repository.
+Hardware measurements will be reported separately from the pre-fabrication simulation results.
 
 ---
 

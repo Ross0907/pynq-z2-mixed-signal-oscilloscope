@@ -4,7 +4,7 @@ The oscilloscope is implemented as a four-layer mixed-signal PCB designed around
 
 ## Layer structure
 
-The committed layer views show:
+The PCB layer views show:
 
 - front copper and component routing;
 - an inner ground/reference layer;
@@ -15,7 +15,7 @@ The committed layer views show:
 
 The two acquisition channels use closely matched physical structures. Attenuation, amplification, filtering, and differential-drive sections follow the signal direction from the BNC connectors toward the ADC.
 
-The FDA-to-ADC interconnect is deliberately compact to reduce parasitic imbalance at the converter input.
+The FDA-to-ADC interconnect is compact to reduce parasitic imbalance at the converter input.
 
 ## Digital routing
 
