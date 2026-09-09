@@ -189,12 +189,12 @@ LOW and HIGH range plots share the same time scale within each acquisition mode.
 </tr>
 <tr>
 <td width="50%" valign="top" align="center">
-<strong>HIGH RANGE Â· FAST MODE Â· 40 MHz</strong><br>
+<strong>HIGH RANGE · FAST MODE · 40 MHz</strong><br>
 <sub>40 MHz FAST-path response in HIGH range.</sub><br><br>
 <img src="docs/assets/plots/TRANSIENT_HIGH_FAST_40MHz_differential.svg" width="100%" alt="High range FAST mode 40 MHz transient">
 </td>
 <td width="50%" valign="top" align="center">
-<strong>HIGH RANGE Â· DUAL MODE Â· 20 MHz</strong><br>
+<strong>HIGH RANGE · DUAL MODE · 20 MHz</strong><br>
 <sub>20 MHz DUAL-path response in HIGH range.</sub><br><br>
 <img src="docs/assets/plots/TRANSIENT_HIGH_DUAL_20MHz_differential.svg" width="100%" alt="High range DUAL mode 20 MHz transient">
 </td>
