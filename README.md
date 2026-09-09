@@ -272,7 +272,7 @@ These are modeled results, not hardware measurements.
 
 The anti-alias filters pass, but the extracted HIGH/LOW range scaling still requires further analysis. The source S47P shows approximately **2.1–2.3 dB LOW-minus-HIGH separation** through most of the MHz acquisition band, while the schematic-reference network remains near **10 dB**. The larger extracted network closely matches the reduced S47P at the checked frequencies.
 
-The schematic-level range networks to investigate are K1/K2 and their associated attenuation/compensation resistor-capacitor networks documented in [`docs/06_simulation_results.md`](docs/06_simulation_results.md).
+The schematic-level range networks to analyze are K1/K2 and their associated attenuation/compensation resistor-capacitor networks documented in [`docs/06_simulation_results.md`](docs/06_simulation_results.md).
 
 ### Current pre-fabrication status
 

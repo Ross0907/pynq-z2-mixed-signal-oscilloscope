@@ -108,7 +108,7 @@ The schematic reference stays near 10 dB through the MHz band. CH2 follows the s
 
 `verification/results/FULL222_VS_MERGED_S47P.csv` shows that the reduced S47P representation agrees closely with the larger extracted network at the checked frequencies.
 
-The schematic-level networks to investigate are:
+The schematic-level networks to analyze are:
 
 - CH1 range relay K1;
 - CH1 LOW attenuation/compensation network R1, R2, C1, C2, C3;
