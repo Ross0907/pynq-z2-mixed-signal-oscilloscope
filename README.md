@@ -171,7 +171,7 @@ The two anti-alias paths align the analog bandwidth with the corresponding acqui
 
 The transient set spans both input ranges and both acquisition modes. Each plot shows the fully differential amplifier output together with the differential voltage presented to the ADC input.
 
-The four differential transient figures use a common time scale for direct visual comparison. The displayed samples come directly from the committed PSpice exports; no waveform data is extrapolated, repeated, or synthesized.
+Within each acquisition mode, the LOW and HIGH range transient figures use the same time scale for direct visual comparison. The DUAL pair uses the longest common DUAL record available from the committed PSpice exports, while the FAST pair uses the longest common FAST record. No waveform data is extrapolated, repeated, or synthesized.
 
 
 <p align="center">
