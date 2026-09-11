@@ -31,8 +31,12 @@ The calibration screen stores a frequency-response correction per board/channel/
 | 1.0 MHz | 0.337012 dB | 0.422379 dB |
 | 0.5 MHz | 0.237644 dB | 0.297149 dB |
 | 0.25 MHz | 0.101197 dB | 0.118948 dB |
+| 0.125 MHz | 0.070279 dB | 0.082351 dB |
+| 0.0625 MHz | 0.008444 dB | 0.009156 dB |
 
-The 0.25 MHz grid therefore comes within approximately 0.0012 dB of the 0.10 dB residual target for the 2% case, but neither tolerance case is yet declared closed at that target. A denser calibration-spacing study is the next software-facing check; it does not require a PCB or BOM change.
+The calibration-density gate is therefore closed at **0.125 MHz spacing** for both 240 nH tolerance scenarios against the `<= 0.10 dB` residual target. The 0.0625 MHz grid provides substantial additional numerical margin but is not required by the current calibration target.
+
+This does not waive the pre-ADC alias requirement. In particular, the 5% 240 nH scenario still misses the original 40 dB FAST alias target by approximately 0.204 dB even though its deterministic in-band amplitude response is software-correctable.
 
 ## Headroom screen
 
