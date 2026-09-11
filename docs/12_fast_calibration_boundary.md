@@ -49,6 +49,26 @@ Using the existing FAST 40 MHz transient-equivalent amplitudes as the anchor, th
 
 This is a screening result anchored to the existing transient-equivalent data, not a replacement for final active-device overload/recovery verification.
 
+## ADC-load provenance and 16-case AC closure
+
+The V13 compact-model provenance audit regenerated both ADC-load interpretations from the same frozen GSpice network:
+
+- historical control: `1.9 kohm || 6.6 pF`;
+- authoritative AD9655 load: `30 ohm` in series with `6.7 pF`.
+
+The existing CH1/CH2 FAST and DUAL compact models match the authoritative `30 ohm + 6.7 pF series` generation exactly by SHA-256. None match the historical parallel-load generation. The exact-vs-historical regenerated models are not byte-identical and differ in reduced port admittance, so this classification is unambiguous.
+
+Therefore the completed 16-case active-device AC set already uses the authoritative ADC load. No additional AC rerun is required solely to change the load model.
+
+Current full-system AC results are:
+
+- FAST worst raw ripple: **1.134459 dB**;
+- FAST minimum 62.5 MHz rejection: **41.736411 dB**, passing the 40 dB hardware target;
+- DUAL worst raw ripple: **0.914404 dB**;
+- DUAL minimum 31.25 MHz rejection: **36.191072 dB**, passing the 35 dB hardware target.
+
+The next unresolved analog gate is nonlinear overload/recovery using the real vendor active-device behavior. The transient-stable substitute models are not authoritative for clipping or recovery because their nonlinear clamp/current-limit behavior was intentionally removed.
+
 ## Software ownership
 
 The FPGA, Linux daemon, ngscopeclient integration, and calibration implementation live in the companion software repository:
