@@ -246,7 +246,12 @@ PowerDC simulations were used to examine regulator output voltages, sink voltage
   <img src="docs/assets/powerdc/sink_voltage_summary.png" width="100%" alt="PowerDC sink voltage results">
 </p>
 
-These screenshots show the earlier solved board-power model. A new PowerDC run with the finalized AWG loads is still pending.
+<p align="center">
+  <img src="docs/assets/powerdc/discrete_current_summary.png" width="48%" alt="PowerDC discrete-current results">
+  <img src="docs/assets/powerdc/power_loss_summary.png" width="48%" alt="PowerDC board power-loss results">
+</p>
+
+These screenshots show the finalized pre-fabrication PowerDC solve for the current board-power model. The solved model includes the TPS61033 boost stage, LM27762 bipolar rails, finalized board loads, and the latest power-routing revision. Regulator voltage, sink voltage, discrete-current, and board-level power-loss checks pass the final PowerDC reporting criteria.
 
 ---
 
@@ -297,7 +302,7 @@ The schematic-level range networks to analyze are K1/K2 and their associated att
 | AWG loaded transient / post-layout AC response | **PASS** |
 | Extracted HIGH/LOW range scaling | **Further analysis required** |
 | ADC digital 26-port PowerSI solve | **Pending** |
-| AWG-updated PowerDC solve | **Pending** |
+| AWG-updated PowerDC solve | **PASS** |
 | Fabricated-board characterization / calibration / thermal validation | **Pending fabrication** |
 
 ---
