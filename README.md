@@ -251,7 +251,7 @@ PowerDC simulations were used to examine regulator output voltages, sink voltage
   <img src="docs/assets/powerdc/power_loss_summary.png" width="48%" alt="PowerDC board power-loss results">
 </p>
 
-These screenshots show the finalized pre-fabrication PowerDC solve for the current board-power model. The solved model includes the TPS61033 boost stage, LM27762 bipolar rails, finalized board loads, and the latest power-routing revision. Regulator voltage, sink voltage, discrete-current, and board-level power-loss checks pass the final PowerDC reporting criteria.
+These screenshots are the original, unmodified PowerDC captures from the finalized pre-fabrication solve. The solved model includes the TPS61033 boost stage, LM27762 bipolar rails, finalized board loads, and the latest power-routing revision. Regulator voltage, sink voltage, discrete-current, and board-level power-loss checks pass the final PowerDC reporting criteria.
 
 ---
 
