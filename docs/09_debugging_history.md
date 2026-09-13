@@ -6,7 +6,7 @@ This project was developed through repeated schematic, simulation, extraction, a
 
 Early stage-level checks were insufficient because the anti-alias filter, fully differential driver, and AD9655 input loading interact. The analysis was changed to evaluate the complete loaded analog path across both channels, both input ranges, FAST/DUAL selection, AC/DC coupling, transient response, and AC response.
 
-The compact-GSpice V7 run set is the current analog filter/coupling reference.
+The compact-GSpice run set remains useful for loaded filter/coupling behavior, while the later open-red extraction is authoritative for absolute frontend range/input-impedance verification.
 
 ## 2. TMUX1574 model was checked against the vendor testbench
 
@@ -16,22 +16,23 @@ The TI TMUX1574 Capture testbench was kept as a known model reference. Its appar
 
 An earlier verification run stopped because the test harness attempted to print undefined differential expressions for the two channels. This was an output-expression problem rather than a circuit failure.
 
-The later V7 compact-GSpice runs completed the intended analog AC, bias, and coupling checks.
+The later compact-GSpice runs completed the intended analog AC, bias, and coupling checks.
 
 ## 4. Solver-graph continuity and port mapping
 
-Sigrity/PowerSI extraction required correction of port mapping and solver-graph continuity around the digital ADC interface. The current 26-port package incorporates the continuity repairs remapped onto the final ODB geometry.
+Sigrity/PowerSI extraction required correction of port mapping and solver-graph continuity around the digital ADC interface. The upstream digital block was subsequently validated and frozen. The only later PCB change requiring focused re-verification was the D1B tee to the J9 auxiliary connector.
 
-The validation found:
+The final focused D1B extraction used six physical ports:
 
-- 26 ports;
-- all referenced terminal nodes present;
-- same-net repair endpoints;
-- maximum native-node remap displacement of 0.002236 mm.
+- IC2 D1B+/-;
+- U9 D1B+/-;
+- J9 D1B+/-. 
 
-This validates the setup structure; the final S26P numerical solve is still pending.
+The resulting S6P contains 4005 unique points from 1 MHz to 10 GHz, is passive, and is reciprocal to numerical precision. At 500 MHz the two branches are -3.808 dB to U9 and -3.278 dB to J9; this is dominated by the expected three-port tee split, not PCB dissipation. J9 P/N skew is 29.7 ps at 500 MHz and mode conversion is -29.1 dB.
 
-## 5. HIGH/LOW range-transfer discrepancy isolated
+**Final disposition:** existing upstream ADC digital SI is frozen/verified and the D1B PCB/J9 passive SI is signed off. The optional off-board cable/receiver eye test remains a separate hardware/system validation for the auxiliary dual-FAST mode.
+
+## 5. HIGH/LOW range-transfer discrepancy isolated and closed
 
 A dedicated diagnostic compared:
 
@@ -40,19 +41,29 @@ A dedicated diagnostic compared:
 3. the schematic-reference range model;
 4. a larger extracted FULL222 network reduced to the same interface.
 
-The extracted source network shows HIGH/LOW separation falling to roughly 2.1–2.3 dB through much of the MHz band, whereas the schematic-reference model retains roughly 10 dB. The larger extracted network agrees closely with the reduced S47P at the checked frequencies.
+The then-current extracted source network showed HIGH/LOW separation falling to roughly 2.1–2.3 dB through much of the MHz band. This was traced to compensation/parasitic interaction in the pre-retune frontend and was useful root-cause evidence, but it is no longer the final absolute range result.
 
-The investigation is centered on the schematic range relay/attenuator/compensation networks K1/K2 and their associated resistor-capacitor networks.
+The later authoritative open-red frontend extraction and retune closed the item using the final `43 pF / 7.5 pF / 110 pF` compensation set. Final nominal verification gives:
+
+- worst flatness: 0.545893 dB;
+- worst HIGH/LOW range-separation error: 0.436622 dB;
+- input resistance: 0.997589–0.999792 MΩ;
+- P6060 compatibility: PASS.
+
+**Final disposition:** HIGH/LOW range scaling PASS. The old 2.1–2.3 dB result is retained only as historical diagnostic evidence.
 
 ## 6. Transient display window
 
-The original 0â€“200 ns figures did not show enough of the DUAL-mode settling behavior. The current plots use matched LOW/HIGH time scales within each acquisition mode, with a longer DUAL interval so the steady periodic response is visible.
-## 7. PowerDC baseline became stale after the AWG was finalized
+The original 0–200 ns figures did not show enough of the DUAL-mode settling behavior. The current plots use matched LOW/HIGH time scales within each acquisition mode, with a longer DUAL interval so the steady periodic response is visible.
 
-The existing PowerDC screenshots predate the finalized AWG load update. The load update adds the AD9102, AWG clock, output amplifier, and increased LM27762-equivalent input demand.
+## 7. PowerDC baseline was refreshed after the AWG and local boost were finalized
 
-The earlier solve therefore remains a baseline result. A new PowerDC run with the finalized loads is pending.
+The original PowerDC screenshots became stale after the AWG and local TPS61033 → LM27762 power architecture were finalized. A later solve updated the board loads and current distribution.
+
+The final pre-fabrication PowerDC reporting set includes the local TPS61033 boost stage, LM27762 bipolar rails, finalized AWG loads, regulator/sink voltages, discrete-current checks, and board-level power-loss checks.
+
+**Final disposition:** updated PowerDC PASS / CLOSED for the current pre-fabrication revision.
 
 ## Current revision
 
-Rev. A remains a pre-fabrication design. Current numerical results and pending analyses are summarized in `11_results.md`.
+Rev. A remains a pre-fabrication design. The previously stale HIGH/LOW range-transfer and ADC passive-SI analysis items are closed. Remaining work is fabrication-related DFM cleanup and post-fabrication characterization/calibration rather than another range-transfer or passive ADC-PCB PowerSI investigation.
