@@ -42,7 +42,6 @@ PSpice transient datasets:
 
 The figures use the full available source record. No waveform data is extrapolated, repeated, or synthesized. The differential plots use a common ±1.7 V Y-axis for direct visual comparison.
 
-
 ### Settled differential metrics
 
 `verification/results/COMPUTED_METRICS.csv` contains the numerical summary:
@@ -86,38 +85,72 @@ Current values:
 - approximately 3.199 Vpp at the output-amplifier side of the modeled 50 Ω division;
 - interpolated post-layout `-3 dB` bandwidth approximately 84.7425 MHz.
 
-## HIGH/LOW range-transfer discrepancy
+## HIGH/LOW range-transfer verification
 
-The extracted anti-alias-filter shapes pass, but the extracted HIGH/LOW range scaling still requires further analysis.
+The earlier FULL222/source-S47P diagnostic exposed a genuine compensation/parasitic sensitivity in the then-current frontend values. That diagnostic showed approximately 12 dB separation at DC collapsing toward approximately 2.2 dB through the MHz region. It remains useful root-cause evidence, but it is **not** the final absolute range model.
 
-Representative CH1 source-S47P values:
+The final absolute range signoff uses the later authoritative open-red frontend extraction and the final compensation set:
 
-| Frequency | LOW - HIGH separation |
-|---:|---:|
-| DC | 12.064 dB |
-| 100 kHz | 4.464 dB |
-| 1 MHz | 2.226 dB |
-| 2 MHz | 2.177 dB |
-| 10 MHz | 2.113 dB |
-| ~20.03 MHz | 2.112 dB |
-| ~39.90 MHz | 2.130 dB |
-| ~62.45 MHz | 2.167 dB |
+```text
+C3 / C17 = 43 pF
+C4 / C18 = 7.5 pF
+C7 / C11 = 110 pF
+```
 
-The schematic reference stays near 10 dB through the MHz band. CH2 follows the same extracted trend. The key values are in `verification/results/RANGE_TRANSFER_KEY_POINTS.csv`.
+Final open-red nominal verification:
 
-`verification/results/FULL222_VS_MERGED_S47P.csv` shows that the reduced S47P representation agrees closely with the larger extracted network at the checked frequencies.
+| Metric | Result |
+|---|---:|
+| Open-red extraction provenance | **PASS** |
+| ~1 MΩ topology preflight | **PASS** |
+| Worst frontend flatness | **0.545893 dB** |
+| Worst HIGH/LOW range-separation error | **0.436622 dB** |
+| P6060 compatibility | **PASS** |
+| Input resistance | **0.997589–0.999792 MΩ** |
+| Effective input capacitance @ 10 kHz | **16.471–41.815 pF** |
 
-The schematic-level networks to analyze are:
+The previous 2.1–2.3 dB range-separation result belongs to the superseded pre-retune extraction state and must not be used as the final vertical-range metric.
 
-- CH1 range relay K1;
-- CH1 LOW attenuation/compensation network R1, R2, C1, C2, C3;
-- CH1 HIGH attenuation/compensation network R3, R4, R5, C4, C5, C6;
-- CH1 compensation capacitors C7, C8, C9, C10;
-- CH2 range relay K2;
-- CH2 LOW attenuation/compensation network R11, R13, C15, C16, C17;
-- CH2 HIGH attenuation/compensation network R10, R12, R14, C18, C19, C20;
-- CH2 compensation capacitors C11, C12, C13, C14.
+**Final HIGH/LOW range-scaling status: PASS.**
+
+## ADC digital passive-SI verification
+
+The original upstream ADC digital PCB path was already frozen after the validated broadband extraction. The only later geometry change that required a new passive-SI check was the D1B tee to the J9 auxiliary connector.
+
+A focused PowerSI extraction was therefore run for:
+
+```text
+IC2 D1B+/-
+    ├── U9 D1B+/-
+    └── J9 D1B+/-
+```
+
+The final S6P contains **4005 unique frequency points from 1 MHz to 10 GHz**, is reciprocal to approximately `7.1e-15`, has maximum singular value `0.999999324`, and is passive.
+
+Representative extracted mixed-mode results:
+
+| Frequency | IC2 → U9 SDD21 | IC2 → J9 SDD21 | Input SDD11 | J9 mode conversion |
+|---:|---:|---:|---:|---:|
+| 1 MHz | -3.533 dB | -3.519 dB | -9.558 dB | -79.4 dB |
+| 125 MHz | -3.577 dB | -3.491 dB | -9.625 dB | -40.2 dB |
+| 500 MHz | -3.808 dB | -3.278 dB | -9.852 dB | -29.1 dB |
+| 1 GHz | -4.269 dB | -3.081 dB | -9.380 dB | -23.7 dB |
+
+The approximately 3.5 dB branch level is the expected three-port tee power split, not PCB trace loss. J9 P/N skew is **29.7 ps at 500 MHz**, approximately **3.0% of a 1 ns UI** for the ~1 Gb/s D1 lane.
+
+Final passive-board disposition:
+
+- existing upstream ADC digital SI: **FROZEN / VERIFIED**;
+- D1B tee connectivity and polarity symmetry: **PASS**;
+- J9 routing: **PASS**;
+- passivity and reciprocity: **PASS**;
+- 500 MHz insertion behavior: **PASS**;
+- mode conversion: **PASS**;
+- P/N skew: **PASS**;
+- D1B PCB/J9 passive SI: **SIGNED OFF**.
+
+The optional off-board J9 cable/receiver eye test remains a hardware/system-level validation for the auxiliary dual-FAST mode; it is not an unresolved passive PCB extraction.
 
 ## Historical PSpice output-expression failure
 
-An earlier PSpice run stopped because the test harness attempted to print undefined differential expressions for `CH1_DIFF` and `CH2_DIFF`. That was an output-expression problem rather than a circuit failure. The later V7 compact-GSpice runs completed the intended analog AC, bias, and coupling checks.
+An earlier PSpice run stopped because the test harness attempted to print undefined differential expressions for `CH1_DIFF` and `CH2_DIFF`. That was an output-expression problem rather than a circuit failure. The later compact-GSpice runs completed the intended analog AC, bias, and coupling checks.
