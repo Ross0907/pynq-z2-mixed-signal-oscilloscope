@@ -280,15 +280,21 @@ Across the four principal operating cases, the pre-fabrication model gives:
 
 These are modeled results, not hardware measurements.
 
-### HIGH/LOW range-transfer discrepancy
+### HIGH/LOW range-transfer verification
 
 <p align="center">
   <img src="docs/assets/plots/VERIFICATION_range_transfer_diagnostic.svg" width="820" alt="Extracted high-low range transfer comparison">
 </p>
 
-The anti-alias filters pass, but the extracted HIGH/LOW range scaling still requires further analysis. The source S47P shows approximately **2.1–2.3 dB LOW-minus-HIGH separation** through most of the MHz acquisition band, while the schematic-reference network remains near **10 dB**. The larger extracted network closely matches the reduced S47P at the checked frequencies.
+The earlier reduced S47P/FULL222 diagnostic exposed a real compensation/parasitic sensitivity in the then-current frontend values; it is retained as root-cause evidence rather than used as the final absolute range model. The later authoritative open-red frontend extraction and retune closes this item with the final **43 pF / 7.5 pF / 110 pF** compensation set.
 
-The schematic-level range networks to analyze are K1/K2 and their associated attenuation/compensation resistor-capacitor networks documented in [`docs/06_simulation_results.md`](docs/06_simulation_results.md).
+Final open-red nominal verification gives **0.545893 dB worst flatness**, **0.436622 dB worst HIGH/LOW range-separation error**, **0.997589–0.999792 MΩ input resistance**, and a **PASS** for the P6060 compatibility check. The earlier 2.1–2.3 dB extracted separation is therefore a superseded intermediate diagnostic, not the final range-scaling result.
+
+### ADC digital passive SI
+
+The original upstream ADC digital interface was already frozen after the validated 1 MHz–10 GHz extraction. The only later geometry change requiring re-verification was the branched D1B path to J9. A focused six-port PowerSI extraction of `IC2 D1B± → U9 D1B± / J9 D1B±` completed with **4005 unique points from 1 MHz to 10 GHz**, numerical reciprocity to approximately `7.1e-15`, maximum singular value `0.999999324`, and passive behavior.
+
+At the 1 Gb/s lane Nyquist frequency of 500 MHz, the extracted branches are **−3.808 dB to U9** and **−3.278 dB to J9**; the approximately 3.5 dB level is the expected three-port tee split rather than PCB dissipation. J9 P/N skew is **29.7 ps (~3.0% UI)** and J9 differential-to-common-mode conversion is **−29.1 dB** at 500 MHz. The existing upstream digital SI and the new D1B/J9 passive PCB path are therefore **signed off**.
 
 ### Current pre-fabrication status
 
@@ -300,8 +306,8 @@ The schematic-level range networks to analyze are K1/K2 and their associated att
 | FDA/ADC loaded transients and common mode | **PASS** |
 | Modeled AD9655 + AFE dynamic performance | **PASS** |
 | AWG loaded transient / post-layout AC response | **PASS** |
-| Extracted HIGH/LOW range scaling | **Further analysis required** |
-| ADC digital 26-port PowerSI solve | **Pending** |
+| Extracted HIGH/LOW range scaling | **PASS — authoritative open-red frontend extraction** |
+| ADC digital PCB PowerSI | **PASS — upstream frozen; D1B/J9 passive SI signed off** |
 | AWG-updated PowerDC solve | **PASS** |
 | Fabricated-board characterization / calibration / thermal validation | **Pending fabrication** |
 
@@ -313,7 +319,7 @@ The project combines several analysis levels:
 
 - **PSpice / SPICE:** AC response, large-signal transient behavior, ADC-loaded differential drive, common-mode behavior, switch/filter modes, and AWG output response.
 - **Post-layout extraction:** critical analog and high-speed interconnect behavior with PCB parasitics.
-- **Cadence Sigrity / PowerSI:** 26-port ADC digital-interface setup, structural validation, and numerical SI analysis.
+- **Cadence Sigrity / PowerSI:** ADC digital-interface extraction and passive SI verification, including the final D1B/J9 branch, plus structural and numerical validation.
 - **PowerDC:** regulator, sink-voltage, rail-current, and power-loss analysis.
 - **KiCad:** schematic capture, four-layer PCB implementation, DRC, differential routing, stackup, and fabrication outputs.
 - **FPGA:** AD9655 control, source-synchronous capture, acquisition-mode logic, buffering, triggering, and host communication.
