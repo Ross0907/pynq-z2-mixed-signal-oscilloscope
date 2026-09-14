@@ -5,13 +5,14 @@ The oscilloscope is implemented as a four-layer mixed-signal PCB designed around
 ## Board views
 
 <p align="center">
-  <img src="assets/hardware/pcb_3d_top.png" width="48%" alt="PCB top view">
-  <img src="assets/hardware/pcb_3d_oblique_front.png" width="48%" alt="PCB oblique view">
+  <img src="assets/hardware/pcb_3d_bottom.png" width="50.781%" alt="PCB bottom view">
+  <img src="assets/hardware/pcb_3d_top.png" width="48.219%" alt="PCB top view">
+
 </p>
 
 <p align="center">
-  <img src="assets/hardware/pcb_3d_bottom.png" width="48%" alt="PCB bottom view">
-  <img src="assets/hardware/pynq_z2_integrated_render.png" width="48%" alt="PCB integrated with PYNQ-Z2">
+  <img src="assets/hardware/pcb_3d_oblique_front.png" width="47.143%" alt="PCB oblique view">
+  <img src="assets/hardware/pynq_z2_integrated_render.png" width="51.857%" alt="PCB integrated with PYNQ-Z2">
 </p>
 
 ## Layer structure
