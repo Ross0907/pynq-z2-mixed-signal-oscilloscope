@@ -1,120 +1,71 @@
 # Signal and Power Integrity
 
-This page summarizes the current pre-fabrication SI/PI setup and results. Structural setup validation is kept separate from numerical S-parameter and DC-power results.
+This page summarizes the Rev. A post-layout SI and board-power results.
 
 ## PCB reference structure
 
-The four-layer PCB uses the following physical stack in the current PowerSI package:
+The four-layer PCB uses the following physical stack in the PowerSI model:
 
 | Layer | Thickness |
 |---|---:|
-| F.Mask | 10.0000 µm |
-| F.Cu | 34.2646 µm |
-| dielectric 1 | 100.0000 µm |
-| In1.Cu | 17.1323 µm |
-| dielectric 2 | 1275.0000 µm |
-| In2.Cu | 17.1323 µm |
-| dielectric 3 | 100.0000 µm |
-| B.Cu | 34.2646 µm |
-| B.Mask | 10.0000 µm |
-| **Total** | **1597.7938 µm** |
+| F.Mask | 10.0000 um |
+| F.Cu | 34.2646 um |
+| dielectric 1 | 100.0000 um |
+| In1.Cu | 17.1323 um |
+| dielectric 2 | 1275.0000 um |
+| In2.Cu | 17.1323 um |
+| dielectric 3 | 100.0000 um |
+| B.Cu | 34.2646 um |
+| B.Mask | 10.0000 um |
+| **Total** | **1597.7938 um** |
 
-Critical high-speed routing is referenced to continuous ground structure where possible. The principal analysis targets are the FDA-to-ADC analog differential paths, AD9655 source-synchronous digital interface, DCO, FAST/AUX switching path, PYNQ connector transition, and 125 MHz clock path.
+Critical high-speed routing is referenced to continuous ground structure where possible. The main analysis targets are the FDA-to-ADC analog differential paths, AD9655 source-synchronous digital interface, DCO, FAST/AUX switching path, PYNQ connector transition and clock paths.
 
-## Extracted passive-network checks
+## PowerSI
 
-Sampled extracted networks were used to check connectivity and passive behavior. The sampled frontend network is reciprocal to numerical precision and is effectively passive through the acquisition band. These checks do not replace the final digital 26-port solve.
+The completed passive-SI campaign contains **12 result sets** spanning the upstream ADC interface, post-switch digital paths, clocks, analog frontend/post-ADC networks and AWG interconnects.
 
-## ADC digital PowerSI setup
+The focused D1B/J9 extraction uses six physical ports at IC2, U9 and J9. Its S6P contains **4005 points from 1 MHz to 10 GHz**, with numerical reciprocity of approximately `7.1e-15` and maximum singular value `0.999999324`.
 
-The current 26-port SPD package passes structural validation.
+At 500 MHz:
 
-`verification/si_pi/POWERSI_26PORT_VALIDATION.txt` records:
+- IC2 to U9 differential transmission: **-3.808 dB**
+- IC2 to J9 differential transmission: **-3.278 dB**
+- J9 P/N skew: **29.7 ps**
+- J9 differential-to-common conversion: **-29.1 dB**
 
-- all expected stack layers present;
-- 1597.7938 µm total stack thickness;
-- unique node and trace IDs;
-- 26 ports present;
-- all 96 referenced terminal-node references exist;
-- J9 AUX ports mapped to physical pad nodes;
-- 15 repair components and 14 repair traces present;
-- all repair resistor and repair trace endpoints are same-net;
-- causality enabled;
-- 50 Ω reference impedance;
-- 1 MHz to 10 GHz, 1001-point logarithmic sweep;
-- native-node remap maximum displacement 0.002236 mm.
+The approximately 3.5 dB branch level is dominated by the expected three-port tee split rather than trace dissipation.
 
-The port set covers the AD9655 D0A, D0B, D1A, D1B and DCO pairs, corresponding switched/terminated endpoints, and the J9 AUX endpoint.
+`verification/si_pi/POWERSI_26PORT_VALIDATION.txt` and `POWERSI_26PORT_SETUP.txt` retain the detailed upstream interface setup information.
 
-### Remaining PowerSI work
+## PowerDC
 
-The final 26-port numerical solve is pending. The required sequence is:
+The board-power model was solved after the AWG and local power architecture were finalized. The load model includes:
 
-1. solve the current 26-port SPD;
-2. export S26P in RI, 50 Ω, single-ended form;
-3. export the companion CKT;
-4. check numerical validity;
-5. check passivity and reciprocity;
-6. convert/check the required mixed-mode insertion and return-loss paths;
-7. evaluate DCO/data-lane transmission and crosstalk over the relevant spectrum.
+- AD9655 converter loads
+- clock rails
+- AFE and switch loads
+- TPS61033 boost stage
+- LM27762 bipolar analog rails
+- AD9102: **30 mA** from PYNQ_3V3
+- 125 MHz LVDS oscillator: **27 mA** from CLK3V3
+- ADA4817-2 AWG output stage: **22 mA** device current
+- LM27762-equivalent CP_3V3 input load: **0.277 A**
+- -2V0 output load: **0.192 A**
+- +3V0 output load: **0.084 A**
 
-The setup parameters are in `verification/si_pi/POWERSI_26PORT_SETUP.txt`.
+The solved result set includes regulator voltage, sink voltage, discrete-current and board conductive-loss views. Original captures are stored under `docs/assets/powerdc/`.
 
-## Existing PowerDC results
+<p align="center">
+  <img src="assets/powerdc/vrm_voltage_summary.png" width="48%" alt="PowerDC regulator voltage results">
+  <img src="assets/powerdc/sink_voltage_summary.png" width="48%" alt="PowerDC sink voltage results">
+</p>
 
-The screenshots show the previously solved board-power model and provide baseline source/sink voltage and rail-distribution results. They predate the finalized AWG load set.
+<p align="center">
+  <img src="assets/powerdc/discrete_current_summary.png" width="48%" alt="PowerDC current results">
+  <img src="assets/powerdc/power_loss_summary.png" width="48%" alt="PowerDC board loss results">
+</p>
 
-The baseline load table includes:
+## Hardware measurements after fabrication
 
-- AD9655 1.8 V analog/digital-equivalent loads;
-- clock rail load;
-- bipolar analog loads;
-- AFE and switch loads;
-- the historical LM27762-equivalent input sink of 0.255 A.
-
-The exact baseline table is `verification/si_pi/POWERDC_LOADS_BASELINE.csv`.
-
-## AWG PowerDC load update
-
-The finalized AWG update adds or changes:
-
-- U13 AD9102: 30 mA from PYNQ_3V3;
-- Y2 125 MHz LVDS oscillator: 27 mA from CLK3V3;
-- U12 ADA4817-2 AWG output amplifier: conservative 22 mA device current, represented on both split-supply rails as appropriate;
-- LM27762-equivalent CP_3V3 input load: 0.255 A to 0.277 A because the negative-rail load rises.
-
-Planning totals from the update:
-
-- CP_3V3 / FL1: 0.277 A;
-- CLK3V3 / FL3: 0.054 A;
-- negative analog rail: 0.192 A;
-- positive analog rail: 0.084 A;
-- total PYNQ_3V3 demand: approximately 0.708 A.
-
-The 0.708 A value is a planning estimate, not a solved copper-distribution result.
-
-### Remaining PowerDC work
-
-A new solve with the finalized AWG loads is pending. Record at minimum:
-
-- PYNQ_3V3 minimum voltage;
-- CLK3V3 minimum voltage;
-- CP_3V3 minimum voltage;
-- negative-rail worst voltage;
-- J3 and J5 current sharing;
-- FL1 and FL3 current;
-- maximum trace current density;
-- maximum via current;
-- total conductive PCB loss.
-
-## Measurements after fabrication
-
-Hardware measurements will cover:
-
-- rail DC accuracy and ripple;
-- startup sequencing;
-- 125 MHz clock amplitude/jitter;
-- ADC DCO/data timing margin;
-- FFT/noise-floor behavior;
-- simultaneous acquisition + AWG supply interaction;
-- sustained-load thermal behavior.
+Physical characterization will cover rail accuracy and ripple, startup sequencing, clock amplitude/jitter, ADC timing margin, FFT/noise-floor behavior, simultaneous acquisition plus AWG operation and sustained-load thermal behavior.
