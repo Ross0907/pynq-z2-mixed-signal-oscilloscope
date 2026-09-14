@@ -1,73 +1,51 @@
-PYNQ-Z2 OSCILLOSCOPE / MDO — FINAL AWG POWERDC UPDATE
-=====================================================
-retained PCB baseline:
-  Pynq_Oscilloscope(20260904-235630).zip
-  Pynq_Oscilloscope-odb(9).zip
+PYNQ-Z2 OSCILLOSCOPE / MDO - AWG POWERDC LOAD MODEL
+====================================================
 
-Previous used PowerDC baseline:
-  Total PYNQ_3V3 draw        = 0.607028 A
-  FL1 / CP_3V3               = 0.255 A
-  FL3 / CLK3V3               = 0.027 A
-  LM27762 +3V0 output        = 0.084 A
-  LM27762 -2V0 output        = 0.170 A
+The board-power model includes the finalized waveform-generator and local
+bipolar-rail loads used for the completed Rev. A PowerDC analysis.
 
-Add the following AWG loads:
+AWG / CLOCK LOADS
+-----------------
 
-1) U13 AD9102
-   Rail: PYNQ_3V3
-   PowerDC sink: 0.030 A
-   Rationale: conservative rounded value; ADI quotes 96.54 mW at 3.3 V,
-   180 MSPS and 4 mA output (~29.3 mA total). Final design is only
-   125 MSPS and ~2 mA full-scale, so 30 mA is conservative.
+U13 AD9102
+  Rail: PYNQ_3V3
+  Sink current: 0.030 A
 
-2) Y2 AK5DAF1 125 MHz LVDS oscillator
-   Rail: CLK3V3
-   PowerDC sink: 0.027 A
+Y2 125 MHz LVDS oscillator
+  Rail: CLK3V3
+  Sink current: 0.027 A
 
-3) U12 ADA4817-2 AWG output amplifier
-   Channel A active, channel B powered down.
-   Use conservative combined device current = 0.022 A.
+U12 ADA4817-2 AWG output amplifier
+  Channel A active, channel B powered down
+  Conservative device current: 0.022 A
+  PYNQ_3V3 sink: 0.022 A
+  -2V0 sink:     0.022 A
 
-   PYNQ_3V3 sink: 0.022 A
-   -2V0 sink:     0.022 A
+BIPOLAR RAIL MODEL
+------------------
 
-   Do not halve this current between positive and negative rails: the same
-   split-supply device current flows through both supply rails.
+The LM27762-equivalent CP_3V3 input load includes the updated negative-rail
+demand from the AWG output stage.
 
-4) Update the LM27762 equivalent input load used by the existing manual
-   PowerDC model because -2V0 now carries the extra U12 current.
+  SINK_U4_CP_3V3_GND = 0.277 A
+  U4 -2V0 output load = 0.192 A
+  U4 +3V0 output load = 0.084 A
 
-   Existing:
-     +3V0 load 84 mA + -2V0 load 170 mA + ~1 mA overhead = 255 mA
+The same split-supply amplifier current flows through the positive and
+negative supply paths; the device current is not divided in half between
+rails.
 
-   New:
-     +3V0 load 84 mA + -2V0 load 192 mA + ~1 mA overhead = 277 mA
+POWERDC RESULTS
+---------------
 
-   Therefore:
-     SINK_U4_CP_3V3_GND = 0.277 A
-     U4 -2V0 output load total = 0.192 A
-     U4 +3V0 output load total = 0.084 A (unchanged)
+The final board-power solve uses these loads together with the converter,
+AFE, switch, clock and regulator loads on the final Rev. A board model.
 
-Expected approximate new board totals before solving copper distribution:
-  FL1 / CP_3V3        ~0.277 A
-  FL3 / CLK3V3        ~0.054 A
-  -2V0 total          ~0.192 A
-  +3V0 total           0.084 A
-  total PYNQ_3V3      ~0.708 A
+Original result captures are stored in:
+  docs/assets/powerdc/vrm_voltage_summary.png
+  docs/assets/powerdc/sink_voltage_summary.png
+  docs/assets/powerdc/discrete_current_summary.png
+  docs/assets/powerdc/power_loss_summary.png
 
-The ~0.708 A figure is a planning estimate only. Final J3/J5 current sharing,
-rail minima, trace/via current density and copper loss must come from the
-new PowerDC solve on the final ODB geometry.
-
-Recommended post-run values to record:
-  PYNQ_3V3 minimum voltage
-  CLK3V3 minimum voltage
-  CP_3V3 minimum voltage
-  -2V0 worst/most-positive voltage
-  J3 current
-  J5 current
-  FL1 current
-  FL3 current
-  maximum trace current density
-  maximum via current
-  total PCB conductive loss
+The result set covers regulator voltage, sink voltage, discrete current and
+board conductive loss for the completed pre-fabrication power model.
