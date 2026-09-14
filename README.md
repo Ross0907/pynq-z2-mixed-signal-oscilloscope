@@ -53,19 +53,22 @@ PYNQ-Z2 control
 
 ## PCB
 
-<table>
-<tr>
-<td width="50%" align="center"><img src="docs/assets/hardware/revA_20260914_top.png" width="100%" alt="PCB top render"></td>
-<td width="50%" align="center"><img src="docs/assets/hardware/revA_20260914_iso.png" width="100%" alt="PCB isometric render"></td>
-</tr>
-<tr>
-<td width="50%" align="center"><img src="docs/assets/hardware/revA_20260914_bottom.png" width="100%" alt="PCB bottom render"></td>
-<td width="50%" align="center"><img src="docs/assets/hardware/revA_20260914_top_render.png" width="100%" alt="PCB rendered top view"></td>
-</tr>
-</table>
+<p align="center">
+  <img src="docs/assets/hardware/revA_upload_pcbtop_f079d667f2.png" width="48%" alt="PCB cropped top view">
+  <img src="docs/assets/hardware/revA_upload_pcbiso_f6d9cb6d20.png" width="48%" alt="PCB isometric view">
+</p>
 
 <p align="center">
-  <img src="docs/assets/hardware/revA_20260914_pynq_integrated.png" width="960" alt="PYNQ-Z2 with oscilloscope board">
+  <img src="docs/assets/hardware/revA_upload_pcbtoprender_5d588d03a3.png" width="48%" alt="PCB rendered top view">
+  <img src="docs/assets/hardware/revA_upload_pcbbottomrender_97dc18fa79.png" width="48%" alt="PCB rendered back view">
+</p>
+
+<p align="center">
+  <img src="docs/assets/hardware/revA_upload_pcbback_9ee6acc6ed.png" width="960" alt="PCB cropped back view">
+</p>
+
+<p align="center">
+  <img src="docs/assets/hardware/revA_upload_pcbpynqiso_63e5e92bf8.png" width="960" alt="PYNQ-Z2 with oscilloscope board">
 </p>
 The board integrates two analog-input BNCs, a dedicated waveform-generator BNC, FPGA interconnects, logic-analyzer connectivity, clocking, power conversion, local regulation and distributed test points. Critical high-speed routes use continuous reference planes, dense ground stitching and short FDA-to-ADC interconnects.
 
@@ -156,21 +159,14 @@ PowerDC was run with the completed AWG load model, including the TPS61033 boost 
 ## Verification summary
 
 <p align="center">
-  <img src="docs/assets/plots/FINAL_filter_ripple.svg" width="960" alt="Loaded AC passband ripple">
+  <img src="docs/assets/plots/FINAL_filter_ripple.svg" width="48%" alt="Loaded AC passband ripple">
+  <img src="docs/assets/plots/FINAL_nyquist_rejection.svg" width="48%" alt="Anti-alias rejection">
 </p>
 
 <p align="center">
-  <img src="docs/assets/plots/FINAL_nyquist_rejection.svg" width="960" alt="Anti-alias rejection">
+  <img src="docs/assets/plots/FINAL_transient_adc_utilization.svg" width="48%" alt="Settled transient ADC utilization">
+  <img src="docs/assets/plots/FINAL_frontend_absolute.svg" width="48%" alt="Frontend range and input-impedance results">
 </p>
-
-<p align="center">
-  <img src="docs/assets/plots/FINAL_transient_adc_utilization.svg" width="960" alt="Settled transient ADC utilization">
-</p>
-
-<p align="center">
-  <img src="docs/assets/plots/FINAL_frontend_absolute.svg" width="960" alt="Frontend range and input-impedance results">
-</p>
-
 | Item | Result |
 |---|---|
 | DUAL anti-alias response | **PASS** |
