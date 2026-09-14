@@ -66,9 +66,6 @@ The solved result set includes regulator voltage, sink voltage, discrete-current
 
 <p align="center">
   <img src="assets/powerdc/discrete_current_summary.png" width="38.882%" alt="PowerDC current results">
-</p>
-
-<p align="center">
   <img src="assets/powerdc/power_loss_summary.png" width="60.118%" alt="PowerDC board loss results">
 </p>
 
