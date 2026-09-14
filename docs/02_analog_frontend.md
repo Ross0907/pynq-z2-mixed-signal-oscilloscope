@@ -1,39 +1,38 @@
 # Analog Front End
 
-The analog front end was designed as a loaded end-to-end signal chain extending from the BNC connector to the AD9655 input.
+The analog front end is evaluated as a loaded signal chain from the BNC connector to the AD9655 input.
 
 ## Input network
 
-Each channel includes protection, AC/DC coupling, and selectable high/low attenuation. The attenuation network extends the usable input range while maintaining the signal amplitude required by the active stages.
+Each channel includes input protection, selectable AC/DC coupling and high/low range selection. The final compensation values are:
+
+- C3 / C17: **43 pF**
+- C4 / C18: **7.5 pF**
+- C7 / C11: **110 pF**
+
+Post-layout range and input-impedance analysis gives **0.545893 dB** worst flatness, **0.436622 dB** worst HIGH/LOW separation error and **0.997589–0.999792 Mohm** input resistance.
 
 ## High-speed amplification
 
-ADA4817-2 amplifiers provide the high-speed buffering and gain functions. The PCB layout around these devices uses compact feedback paths and local decoupling to limit parasitic inductance and capacitive loading.
+ADA4817-2 amplifiers provide the high-speed buffering and gain functions. The layout uses compact feedback paths, short high-frequency current loops and local decoupling around each amplifier.
 
 ## Selectable anti-alias filtering
 
 Two filter paths support the two acquisition modes:
 
-| Mode | Post-layout simulated -3 dB bandwidth |
-|---|---:|
-| DUAL | ~21.95 MHz |
-| FAST | ~41.21 MHz |
+| Mode | -3 dB bandwidth | Passband ripple | Rejection at Nyquist |
+|---|---:|---:|---:|
+| DUAL | 22.054–22.073 MHz | 0.865–0.914 dB | 36.191–36.278 dB @ 31.25 MHz |
+| FAST | 41.368–41.471 MHz | 0.959–1.134 dB | 41.736–42.224 dB @ 62.5 MHz |
 
-The DUAL filter provides approximately 36.1 dB attenuation at 31.25 MHz, while the FAST filter provides approximately 41.9 dB attenuation at 62.5 MHz.
+The AC-coupled cases give a **3.441–3.471 Hz** high-pass corner.
 
 ## Differential ADC drive
 
-The ADA4927-2 drives the AD9655 differentially. Simulation tracks the FDA differential output, ADC differential input, FDA common-mode voltage, and ADC common-mode voltage independently.
+The ADA4927-2 drives the AD9655 differentially. Simulation tracks the FDA differential output, loaded ADC differential input and common-mode behavior independently.
 
-This separation captures both signal amplitude and common-mode behavior under the actual modeled ADC loading.
+## Transient operation
 
-## Transient matrix
+The settled transient set covers both channels, both input ranges and both acquisition modes. All eight cases remain below the 2.8 Vpp ADC differential full-scale reference, with a maximum simulated utilization of **88.97%**.
 
-The high-frequency transient set contains four operating combinations:
-
-- Low range, FAST mode, 40 MHz
-- Low range, DUAL mode, 20 MHz
-- High range, FAST mode, 40 MHz
-- High range, DUAL mode, 20 MHz
-
-The corresponding raw CSV files are stored under `verification/raw/afe/transient/`.
+Detailed plots and numerical results are in [Simulation Results](06_simulation_results.md).
