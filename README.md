@@ -175,7 +175,7 @@ PowerDC was run with the completed AWG load model, including the TPS61033 boost 
 <img src="docs/assets/plots/FINAL_frontend_absolute.svg" width="100%" alt="Frontend range and input impedance">
 </td>
 </tr>
-</table>
+
 | Item | Result |
 |---|---|
 | DUAL anti-alias response | **PASS** |
@@ -189,6 +189,7 @@ PowerDC was run with the completed AWG load model, including the TPS61033 boost 
 | PowerDC with AWG loads | **PASS** |
 | PCB DRC / ERC | **0 violations / 0 warnings** |
 | Hardware characterization | **After fabrication** |
+
 
 ## Tools
 
