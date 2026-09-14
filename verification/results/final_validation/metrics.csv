@@ -1,9 +1,13 @@
 metric,value,unit
-Open-red frontend worst flatness,0.545893,dB
-Open-red range-separation error,0.436622,dB
+Frontend worst flatness,0.545893,dB
+HIGH/LOW range-separation error,0.436622,dB
+Input resistance minimum,0.997589,Mohm
+Input resistance maximum,0.999792,Mohm
 DUAL worst ripple,0.9144041183046,dB
 DUAL minimum Nyquist rejection,36.19107229798134,dB
 FAST worst ripple,1.1344587210100001,dB
 FAST minimum Nyquist rejection,41.73641106333968,dB
+AC-coupling corner minimum,3.441,Hz
+AC-coupling corner maximum,3.471,Hz
 Transient maximum ADC full-scale utilization,88.96972982035714,%
-PowerSI jobs verified,12,jobs
+PowerSI result sets,12,sets
