@@ -54,19 +54,13 @@ PYNQ-Z2 control
 ## PCB
 
 <p align="center">
-  <img src="docs/assets/hardware/pcb_3d_top.png" width="960" alt="PCB top render">
+  <img src="docs/assets/hardware/pcb_3d_top.png" width="48%" alt="PCB top render">
+  <img src="docs/assets/hardware/pcb_3d_oblique_front.png" width="48%" alt="PCB oblique render">
 </p>
 
 <p align="center">
-  <img src="docs/assets/hardware/pcb_3d_oblique_front.png" width="960" alt="PCB oblique render">
-</p>
-
-<p align="center">
-  <img src="docs/assets/hardware/pcb_3d_bottom.png" width="960" alt="PCB bottom render">
-</p>
-
-<p align="center">
-  <img src="docs/assets/hardware/pcb_top_lit_render.png" width="960" alt="PCB populated render">
+  <img src="docs/assets/hardware/pcb_3d_bottom.png" width="48%" alt="PCB bottom render">
+  <img src="docs/assets/hardware/pcb_top_lit_render.png" width="48%" alt="PCB populated render">
 </p>
 
 <p align="center">
@@ -89,8 +83,11 @@ The analog section was evaluated as a loaded end-to-end path rather than as isol
 The AC-coupled cases give a **3.441–3.471 Hz** high-pass corner. The input-range compensation uses **43 pF / 7.5 pF / 110 pF**, with **0.545893 dB** worst flatness, **0.436622 dB** worst HIGH/LOW separation error and **0.997589–0.999792 Mohm** input resistance.
 
 <p align="center">
-  <img src="docs/assets/plots/AFE_DUAL_relative_transfer.png" width="48%" alt="DUAL mode AFE response">
-  <img src="docs/assets/plots/AFE_FAST_relative_transfer.png" width="48%" alt="FAST mode AFE response">
+  <img src="docs/assets/plots/AFE_DUAL_relative_transfer.png" width="960" alt="DUAL mode AFE response">
+</p>
+
+<p align="center">
+  <img src="docs/assets/plots/AFE_FAST_relative_transfer.png" width="960" alt="FAST mode AFE response">
 </p>
 
 ## High-frequency transient simulation
@@ -141,26 +138,37 @@ For the focused D1B/J9 extraction, the S6P contains **4005 points from 1 MHz to 
 PowerDC was run with the completed AWG load model, including the TPS61033 boost stage, LM27762 bipolar rails, AD9102, clock load and ADA4817-2 AWG stage. The repository includes the resulting regulator-voltage, sink-voltage, discrete-current and board-loss captures.
 
 <p align="center">
-  <img src="docs/assets/powerdc/vrm_voltage_summary.png" width="48%" alt="PowerDC regulator voltage results">
-  <img src="docs/assets/powerdc/sink_voltage_summary.png" width="48%" alt="PowerDC sink voltage results">
+  <img src="docs/assets/powerdc/vrm_voltage_summary.png" width="960" alt="PowerDC regulator voltage results">
+</p>
+
+<p align="center">
+  <img src="docs/assets/powerdc/sink_voltage_summary.png" width="960" alt="PowerDC sink voltage results">
+</p>
+
+<p align="center">
+  <img src="docs/assets/powerdc/discrete_current_summary.png" width="960" alt="PowerDC discrete-current results">
+</p>
+
+<p align="center">
+  <img src="docs/assets/powerdc/power_loss_summary.png" width="960" alt="PowerDC board-loss results">
 </p>
 
 ## Verification summary
 
 <p align="center">
-  <img src="docs/assets/plots/FINAL_filter_ripple.svg" width="860" alt="Loaded AC passband ripple">
+  <img src="docs/assets/plots/FINAL_filter_ripple.svg" width="960" alt="Loaded AC passband ripple">
 </p>
 
 <p align="center">
-  <img src="docs/assets/plots/FINAL_nyquist_rejection.svg" width="860" alt="Anti-alias rejection">
+  <img src="docs/assets/plots/FINAL_nyquist_rejection.svg" width="960" alt="Anti-alias rejection">
 </p>
 
 <p align="center">
-  <img src="docs/assets/plots/FINAL_transient_adc_utilization.svg" width="860" alt="Settled transient ADC utilization">
+  <img src="docs/assets/plots/FINAL_transient_adc_utilization.svg" width="960" alt="Settled transient ADC utilization">
 </p>
 
 <p align="center">
-  <img src="docs/assets/plots/FINAL_frontend_absolute.svg" width="860" alt="Frontend range and input-impedance results">
+  <img src="docs/assets/plots/FINAL_frontend_absolute.svg" width="960" alt="Frontend range and input-impedance results">
 </p>
 
 | Item | Result |
