@@ -54,22 +54,20 @@ PYNQ-Z2 control
 ## PCB
 
 <p align="center">
-  <img src="docs/assets/hardware/revA_upload_pcbtop_f079d667f2.png" width="48%" alt="PCB cropped top view">
-  <img src="docs/assets/hardware/revA_upload_pcbiso_f6d9cb6d20.png" width="48%" alt="PCB isometric view">
+  <img src="docs/assets/hardware/revA_upload_pcbiso_f6d9cb6d20.png" width="47.143%" alt="PCB isometric view">
+  <img src="docs/assets/hardware/revA_upload_pcbpynqiso_63e5e92bf8.png" width="51.857%" alt="PYNQ-Z2 with oscilloscope board">
 </p>
 
 <p align="center">
-  <img src="docs/assets/hardware/revA_upload_pcbtoprender_5d588d03a3.png" width="48%" alt="PCB rendered top view">
-  <img src="docs/assets/hardware/revA_upload_pcbbottomrender_97dc18fa79.png" width="48%" alt="PCB rendered back view">
+  <img src="docs/assets/hardware/revA_upload_pcbtoprender_5d588d03a3.png" width="49.397%" alt="PCB rendered top view">
+  <img src="docs/assets/hardware/revA_upload_pcbbottomrender_97dc18fa79.png" width="49.603%" alt="PCB rendered back view">
 </p>
 
 <p align="center">
-  <img src="docs/assets/hardware/revA_upload_pcbback_9ee6acc6ed.png" width="960" alt="PCB cropped back view">
+  <img src="docs/assets/hardware/revA_upload_pcbtop_f079d667f2.png" width="48.219%" alt="PCB cropped top view">
+  <img src="docs/assets/hardware/revA_upload_pcbback_9ee6acc6ed.png" width="50.781%" alt="PCB cropped back view">
 </p>
 
-<p align="center">
-  <img src="docs/assets/hardware/revA_upload_pcbpynqiso_63e5e92bf8.png" width="960" alt="PYNQ-Z2 with oscilloscope board">
-</p>
 The board integrates two analog-input BNCs, a dedicated waveform-generator BNC, FPGA interconnects, logic-analyzer connectivity, clocking, power conversion, local regulation and distributed test points. Critical high-speed routes use continuous reference planes, dense ground stitching and short FDA-to-ADC interconnects.
 
 [Full schematic PDF](docs/schematics/Pynq_Oscilloscope_schematic.pdf) · [PCB layer PDF](docs/pcb/Pynq_Oscilloscope_pcb_layers.pdf)
@@ -86,11 +84,11 @@ The analog section was evaluated as a loaded end-to-end path rather than as isol
 The AC-coupled cases give a **3.441–3.471 Hz** high-pass corner. The input-range compensation uses **43 pF / 7.5 pF / 110 pF**, with **0.545893 dB** worst flatness, **0.436622 dB** worst HIGH/LOW separation error and **0.997589–0.999792 Mohm** input resistance.
 
 <p align="center">
-  <img src="docs/assets/plots/AFE_DUAL_relative_transfer.png" width="960" alt="DUAL mode AFE response">
+  <img src="docs/assets/plots/AFE_DUAL_relative_transfer.png" width="99%" alt="DUAL mode AFE response">
 </p>
 
 <p align="center">
-  <img src="docs/assets/plots/AFE_FAST_relative_transfer.png" width="960" alt="FAST mode AFE response">
+  <img src="docs/assets/plots/AFE_FAST_relative_transfer.png" width="99%" alt="FAST mode AFE response">
 </p>
 
 ## High-frequency transient simulation
@@ -128,8 +126,8 @@ The waveform-generation subsystem uses an **AD9102** with a **156.25 MHz board c
 Post-layout output-path simulation gives approximately **84.7425 MHz** -3 dB bandwidth, **1.598 Vpp** at the modeled 50 ohm BNC in the 1 MHz transient case, and **3.199 Vpp** at the amplifier side of the modeled 50 ohm division.
 
 <p align="center">
-  <img src="docs/assets/plots/AWG_postlayout_AC_response.png" width="48%" alt="AWG post-layout AC response">
-  <img src="docs/assets/plots/AWG_1MHz_BNC_transient.png" width="48%" alt="AWG 1 MHz BNC transient">
+  <img src="docs/assets/plots/AWG_postlayout_AC_response.png" width="49.5%" alt="AWG post-layout AC response">
+  <img src="docs/assets/plots/AWG_1MHz_BNC_transient.png" width="49.5%" alt="AWG 1 MHz BNC transient">
 </p>
 
 ## Signal and power integrity
@@ -141,31 +139,29 @@ For the focused D1B/J9 extraction, the S6P contains **4005 points from 1 MHz to 
 PowerDC was run with the completed AWG load model, including the TPS61033 boost stage, LM27762 bipolar rails, AD9102, clock load and ADA4817-2 AWG stage. The repository includes the resulting regulator-voltage, sink-voltage, discrete-current and board-loss captures.
 
 <p align="center">
-  <img src="docs/assets/powerdc/vrm_voltage_summary.png" width="960" alt="PowerDC regulator voltage results">
+  <img src="docs/assets/powerdc/vrm_voltage_summary.png" width="99%" alt="PowerDC regulator voltage results">
 </p>
 
 <p align="center">
-  <img src="docs/assets/powerdc/sink_voltage_summary.png" width="960" alt="PowerDC sink voltage results">
+  <img src="docs/assets/powerdc/sink_voltage_summary.png" width="99%" alt="PowerDC sink voltage results">
 </p>
 
 <p align="center">
-  <img src="docs/assets/powerdc/discrete_current_summary.png" width="960" alt="PowerDC discrete-current results">
+  <img src="docs/assets/powerdc/discrete_current_summary.png" width="38.882%" alt="PowerDC discrete-current results">
+  <img src="docs/assets/powerdc/power_loss_summary.png" width="60.118%" alt="PowerDC board-loss results">
 </p>
 
-<p align="center">
-  <img src="docs/assets/powerdc/power_loss_summary.png" width="960" alt="PowerDC board-loss results">
-</p>
 
 ## Verification summary
 
 <p align="center">
-  <img src="docs/assets/plots/FINAL_filter_ripple.svg" width="48%" alt="Loaded AC passband ripple">
-  <img src="docs/assets/plots/FINAL_nyquist_rejection.svg" width="48%" alt="Anti-alias rejection">
+  <img src="docs/assets/plots/FINAL_filter_ripple.svg" width="49%" alt="Loaded AC passband ripple">
+  <img src="docs/assets/plots/FINAL_nyquist_rejection.svg" width="49%" alt="Anti-alias rejection">
 </p>
 
 <p align="center">
-  <img src="docs/assets/plots/FINAL_transient_adc_utilization.svg" width="48%" alt="Settled transient ADC utilization">
-  <img src="docs/assets/plots/FINAL_frontend_absolute.svg" width="48%" alt="Frontend range and input-impedance results">
+  <img src="docs/assets/plots/FINAL_transient_adc_utilization.svg" width="49%" alt="Settled transient ADC utilization">
+  <img src="docs/assets/plots/FINAL_frontend_absolute.svg" width="49%" alt="Frontend range and input-impedance results">
 </p>
 | Item | Result |
 |---|---|
