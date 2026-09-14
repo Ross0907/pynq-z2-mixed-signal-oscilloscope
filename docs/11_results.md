@@ -1,28 +1,43 @@
 # Results Index
 
-This page indexes the numerical tables, plots, source simulation data, and SI/PI setup files used by the current Rev. A documentation.
+This page points to the principal plots and numerical data for Rev. A.
 
-## Analog frequency response
+## Current analog results
 
-Primary figures:
+The concise numerical summary is in:
 
-- `AFE_DUAL_relative_transfer.png`
-- `AFE_FAST_relative_transfer.png`
-- `AFE_FAST_vs_DUAL_CH1.png`
+- `verification/results/final_validation/metrics.csv`
+- `verification/results/final_validation/summary.json`
 
-Numeric tables:
+Current loaded AC ranges:
 
-- `verification/results/AC_RESPONSE_METRICS.csv`
-- `verification/results/AC_COUPLING_METRICS.csv`
-- `verification/results/ANALOG_GSPICE_V7_RUN_STATUS.csv`
+| Mode | -3 dB bandwidth | Passband ripple | Rejection at mode Nyquist |
+|---|---:|---:|---:|
+| DUAL | 22.054–22.073 MHz | 0.865–0.914 dB | 36.191–36.278 dB @ 31.25 MHz |
+| FAST | 41.368–41.471 MHz | 0.959–1.134 dB | 41.736–42.224 dB @ 62.5 MHz |
 
-## README verification plots
+AC-coupling corner: **3.441–3.471 Hz**.
 
-These figures are derived directly from the numerical tables:
+Primary plots:
 
-- `VERIFICATION_AFE_bandwidth_consistency.svg` — `-3 dB` bandwidth spread across all 16 loaded AC cases.
-- `VERIFICATION_AD9655_system_sinad.svg` — ADC-only versus modeled AFE+ADC SINAD.
-- `VERIFICATION_range_transfer_diagnostic.svg` — extracted HIGH/LOW range scaling compared with the schematic reference.
+- `docs/assets/plots/AFE_DUAL_relative_transfer.png`
+- `docs/assets/plots/AFE_FAST_relative_transfer.png`
+- `docs/assets/plots/AFE_FAST_vs_DUAL_CH1.png`
+- `docs/assets/plots/FINAL_filter_ripple.svg`
+- `docs/assets/plots/FINAL_nyquist_rejection.svg`
+
+Earlier compact-model tables remain under `verification/results/` as development data; the `final_validation` summary contains the Rev. A headline figures.
+
+## Input range and impedance
+
+Final compensation: **43 pF / 7.5 pF / 110 pF**.
+
+- worst frontend flatness: **0.545893 dB**
+- worst HIGH/LOW separation error: **0.436622 dB**
+- input resistance: **0.997589–0.999792 Mohm**
+- effective input capacitance @10 kHz: **16.471–41.815 pF**
+
+The earlier FULL222/S47P comparison files are kept as engineering-development data rather than the Rev. A range metric.
 
 ## High-frequency transients
 
@@ -33,42 +48,13 @@ Differential plots:
 - `TRANSIENT_HIGH_FAST_40MHz_differential.svg`
 - `TRANSIENT_HIGH_DUAL_20MHz_differential.svg`
 
-Common-mode plots:
+Common-mode plots are stored beside the differential plots. The settled eight-case set uses **74.95–88.97%** of the 2.8 Vpp ADC differential full-scale reference.
 
-- `TRANSIENT_LOW_FAST_40MHz_common_mode.svg`
-- `TRANSIENT_LOW_DUAL_20MHz_common_mode.svg`
-- `TRANSIENT_HIGH_FAST_40MHz_common_mode.svg`
-- `TRANSIENT_HIGH_DUAL_20MHz_common_mode.svg`
+Raw transient sources are under `verification/raw/afe/transient/`.
 
-Combined view:
+## ADC / noise model
 
-- `transient_matrix_differential.png`
-- `transient_matrix_differential.pdf`
-
-
-Raw transient sources:
-
-- `verification/raw/afe/transient/trans(20260903-220723).csv` — LOW FAST;
-- `verification/raw/afe/transient/trans(20260904-072702).csv` — LOW DUAL;
-- `verification/raw/afe/transient/trans(20260904-084345).csv` — HIGH FAST;
-- `verification/raw/afe/transient/trans(20260904-074916).csv` — HIGH DUAL.
-
-Numerical transient summary:
-
-- `verification/results/COMPUTED_METRICS.csv`
-
-## ADC/noise model
-
-- `verification/results/AD9655_PERFORMANCE_SUMMARY.csv`
-
-This table reports ADC-only and AFE+ADC modeled SNR/SINAD/ENOB values together with the AFE noise contribution used by the pre-fabrication model.
-
-## HIGH/LOW range-transfer analysis
-
-- `verification/results/RANGE_TRANSFER_KEY_POINTS.csv`
-- `verification/results/FULL222_VS_MERGED_S47P.csv`
-
-The extracted source network and larger extracted model agree closely at the checked frequencies. The difference from the schematic-reference HIGH/LOW scaling still requires further analysis.
+`verification/results/AD9655_PERFORMANCE_SUMMARY.csv` contains the modeled ADC-only and AFE+ADC performance data. The principal modeled system range is **75.54–76.97 dB SINAD** and **12.255–12.493 ENOB**.
 
 ## Waveform generator
 
@@ -79,32 +65,34 @@ Figures:
 - `AWG_1MHz_BNC_transient.png`
 - `AWG_1MHz_output_stage.png`
 
-Current simulated values:
+Principal simulated values:
 
-- approximately 84.7425 MHz post-layout `-3 dB` bandwidth;
-- approximately 1.598 Vpp at the modeled 50 Ω BNC for the 1 MHz transient;
-- approximately 3.199 Vpp at the output-amplifier side before the modeled 50 Ω division.
+- **~84.7425 MHz** post-layout -3 dB bandwidth
+- **~1.598 Vpp** at the modeled 50 ohm BNC in the 1 MHz transient
+- **~3.199 Vpp** at the output-amplifier side of the modeled 50 ohm division
 
 ## Signal integrity
 
-Setup files:
+Detailed setup files:
 
 - `verification/si_pi/POWERSI_26PORT_VALIDATION.txt`
 - `verification/si_pi/POWERSI_26PORT_SETUP.txt`
 
-The 26-port SPD passes structural validation. The final S26P numerical solve is pending.
+The completed passive-SI set contains 12 PowerSI result sets. The focused D1B/J9 extraction contains 4005 points from 1 MHz to 10 GHz and is passive and reciprocal to numerical precision.
 
 ## Power integrity
 
+The completed AWG-updated board-power model is documented by:
+
 - `verification/si_pi/POWERDC_LOADS_BASELINE.csv`
 - `verification/si_pi/POWERDC_FINAL_AWG_UPDATE.txt`
-
-The current screenshots correspond to the earlier solved load set. A new PowerDC run with the finalized AWG loads is pending.
+- `docs/assets/powerdc/vrm_voltage_summary.png`
+- `docs/assets/powerdc/sink_voltage_summary.png`
+- `docs/assets/powerdc/discrete_current_summary.png`
+- `docs/assets/powerdc/power_loss_summary.png`
 
 ## Raw simulation directories
 
 - `verification/raw/afe/ac/`
 - `verification/raw/afe/transient/`
 - `verification/raw/awg/`
-
-Simulation, extracted-network, setup-validation, and future measured results are labeled separately throughout the repository.
