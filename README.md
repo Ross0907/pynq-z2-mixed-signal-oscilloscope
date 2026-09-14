@@ -1,7 +1,7 @@
 # PYNQ-Z2 Mixed-Signal Oscilloscope / MDO
 
 <p align="center">
-  <img src="docs/assets/hardware/pcb_render.png" width="960" alt="PYNQ-Z2 mixed-signal oscilloscope PCB render">
+  <img src="docs/assets/hardware/revA_20260914_lit_iso.png" width="960" alt="PYNQ-Z2 mixed-signal oscilloscope PCB render">
 </p>
 
 A custom **dual-channel 16-bit mixed-signal oscilloscope, logic-analyzer interface, and arbitrary-waveform/function-generator platform** built around the **PYNQ-Z2**, **AD9655**, **AD9102**, **ADA4927-2**, and **ADA4817-2**.
@@ -53,20 +53,20 @@ PYNQ-Z2 control
 
 ## PCB
 
-<p align="center">
-  <img src="docs/assets/hardware/pcb_3d_top.png" width="48%" alt="PCB top render">
-  <img src="docs/assets/hardware/pcb_3d_oblique_front.png" width="48%" alt="PCB oblique render">
-</p>
+<table>
+<tr>
+<td width="50%" align="center"><img src="docs/assets/hardware/revA_20260914_top.png" width="100%" alt="PCB top render"></td>
+<td width="50%" align="center"><img src="docs/assets/hardware/revA_20260914_iso.png" width="100%" alt="PCB isometric render"></td>
+</tr>
+<tr>
+<td width="50%" align="center"><img src="docs/assets/hardware/revA_20260914_bottom.png" width="100%" alt="PCB bottom render"></td>
+<td width="50%" align="center"><img src="docs/assets/hardware/revA_20260914_top_render.png" width="100%" alt="PCB rendered top view"></td>
+</tr>
+</table>
 
 <p align="center">
-  <img src="docs/assets/hardware/pcb_3d_bottom.png" width="48%" alt="PCB bottom render">
-  <img src="docs/assets/hardware/pcb_top_lit_render.png" width="48%" alt="PCB populated render">
+  <img src="docs/assets/hardware/revA_20260914_pynq_integrated.png" width="960" alt="PYNQ-Z2 with oscilloscope board">
 </p>
-
-<p align="center">
-  <img src="docs/assets/hardware/pynq_z2_integrated_render.png" width="960" alt="PYNQ-Z2 with oscilloscope board">
-</p>
-
 The board integrates two analog-input BNCs, a dedicated waveform-generator BNC, FPGA interconnects, logic-analyzer connectivity, clocking, power conversion, local regulation and distributed test points. Critical high-speed routes use continuous reference planes, dense ground stitching and short FDA-to-ADC interconnects.
 
 [Full schematic PDF](docs/schematics/Pynq_Oscilloscope_schematic.pdf) · [PCB layer PDF](docs/pcb/Pynq_Oscilloscope_pcb_layers.pdf)
