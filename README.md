@@ -163,6 +163,7 @@ PowerDC was run with the completed AWG load model, including the TPS61033 boost 
   <img src="docs/assets/plots/FINAL_transient_adc_utilization.svg" width="49%" alt="Settled transient ADC utilization">
   <img src="docs/assets/plots/FINAL_frontend_absolute.svg" width="49%" alt="Frontend range and input-impedance results">
 </p>
+
 | Item | Result |
 |---|---|
 | DUAL anti-alias response | **PASS** |
