@@ -2,33 +2,38 @@
 
 The oscilloscope is implemented as a four-layer mixed-signal PCB designed around the PYNQ-Z2 mechanical and electrical interface.
 
+## Board views
+
+<p align="center">
+  <img src="assets/hardware/pcb_3d_top.png" width="48%" alt="PCB top view">
+  <img src="assets/hardware/pcb_3d_oblique_front.png" width="48%" alt="PCB oblique view">
+</p>
+
+<p align="center">
+  <img src="assets/hardware/pcb_3d_bottom.png" width="48%" alt="PCB bottom view">
+  <img src="assets/hardware/pynq_z2_integrated_render.png" width="48%" alt="PCB integrated with PYNQ-Z2">
+</p>
+
 ## Layer structure
 
-The PCB layer views show:
-
-- front copper and component routing;
-- an inner ground/reference layer;
-- an inner power and secondary-routing layer;
-- back copper and auxiliary routing.
+The four-layer layout uses front copper for component fanout and critical local routing, a continuous inner ground/reference plane, an inner power/secondary-routing layer and back copper for auxiliary routing. Critical high-speed paths are kept over continuous reference regions.
 
 ## Analog placement
 
-The two acquisition channels use closely matched physical structures. Attenuation, amplification, filtering, and differential-drive sections follow the signal direction from the BNC connectors toward the ADC.
+The two acquisition channels use closely matched physical structures. Attenuation, amplification, filtering and differential-drive sections follow the signal direction from the BNC connectors toward the ADC.
 
-The FDA-to-ADC interconnect is compact to reduce parasitic imbalance at the converter input.
+The ADA4927-2-to-AD9655 interconnect is short and symmetric to limit parasitic imbalance at the converter input. Local ground stitching is concentrated around the analog channels, filter sections, converter and high-speed amplifiers.
 
 ## Digital routing
 
-The AD9655 source-synchronous interface routes toward the FPGA connector with controlled differential geometry and deliberate pair matching. DCO/FCO and converter clock routes are treated as timing-critical interconnects.
-
-## Ground and return paths
-
-Dense ground stitching surrounds major functional regions and provides short return paths across the board. Critical analog and high-speed digital routes remain referenced to continuous plane regions through their principal routing sections.
+The AD9655 source-synchronous interface routes toward the FPGA connector with controlled differential geometry and pair matching. DCO/FCO, data lanes and converter-clock routes are treated as timing-critical interconnects.
 
 ## Power layout
 
-Power conversion and regulation occupy dedicated regions away from the analog BNC inputs. Local decoupling is concentrated around the ADC, high-speed amplifiers, clock circuitry, logic translation, and AD9102 subsystem.
+Power conversion and regulation occupy dedicated regions away from the analog BNC inputs. Local decoupling is concentrated around the ADC, high-speed amplifiers, clock circuitry, logic translation and AD9102 subsystem.
 
 ## Mechanical integration
 
-The board outline clears the PYNQ-Z2 connector and mechanical geometry while preserving access to BNCs, headers, test points, and mounting holes.
+The board outline follows the PYNQ-Z2 connector and mounting geometry while preserving access to the three BNCs, headers, test points and mounting holes.
+
+The fabrication package uses the final Rev. A board geometry. PCB checks report **0 DRC violations, 0 unconnected pads and 0 footprint errors**, while the schematic ERC reports **0 errors and 0 warnings**.
