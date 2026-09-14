@@ -59,13 +59,13 @@ PYNQ-Z2 control
 </p>
 
 <p align="center">
-  <img src="docs/assets/hardware/revA_upload_pcbtoprender_5d588d03a3.png" width="49.397%" alt="PCB rendered top view">
   <img src="docs/assets/hardware/revA_upload_pcbbottomrender_97dc18fa79.png" width="49.603%" alt="PCB rendered back view">
+  <img src="docs/assets/hardware/revA_upload_pcbtoprender_5d588d03a3.png" width="49.397%" alt="PCB rendered top view">
 </p>
 
 <p align="center">
-  <img src="docs/assets/hardware/revA_upload_pcbtop_f079d667f2.png" width="48.219%" alt="PCB cropped top view">
   <img src="docs/assets/hardware/revA_upload_pcbback_9ee6acc6ed.png" width="50.781%" alt="PCB cropped back view">
+  <img src="docs/assets/hardware/revA_upload_pcbtop_f079d667f2.png" width="48.219%" alt="PCB cropped top view">
 </p>
 
 The board integrates two analog-input BNCs, a dedicated waveform-generator BNC, FPGA interconnects, logic-analyzer connectivity, clocking, power conversion, local regulation and distributed test points. Critical high-speed routes use continuous reference planes, dense ground stitching and short FDA-to-ADC interconnects.
