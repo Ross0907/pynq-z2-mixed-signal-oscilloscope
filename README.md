@@ -54,17 +54,23 @@ PYNQ-Z2 control
 ## PCB
 
 <p align="center">
-  <img src="docs/assets/hardware/pcb_3d_top.png" width="48%" alt="PCB top render">
-  <img src="docs/assets/hardware/pcb_3d_oblique_front.png" width="48%" alt="PCB oblique render">
+  <img src="docs/assets/hardware/pcb_3d_top.png" width="960" alt="PCB top render">
 </p>
 
 <p align="center">
-  <img src="docs/assets/hardware/pcb_3d_bottom.png" width="48%" alt="PCB bottom render">
-  <img src="docs/assets/hardware/pcb_top_lit_render.png" width="48%" alt="PCB populated render">
+  <img src="docs/assets/hardware/pcb_3d_oblique_front.png" width="960" alt="PCB oblique render">
 </p>
 
 <p align="center">
-  <img src="docs/assets/hardware/pynq_z2_integrated_render.png" width="900" alt="PYNQ-Z2 with oscilloscope board">
+  <img src="docs/assets/hardware/pcb_3d_bottom.png" width="960" alt="PCB bottom render">
+</p>
+
+<p align="center">
+  <img src="docs/assets/hardware/pcb_top_lit_render.png" width="960" alt="PCB populated render">
+</p>
+
+<p align="center">
+  <img src="docs/assets/hardware/pynq_z2_integrated_render.png" width="960" alt="PYNQ-Z2 with oscilloscope board">
 </p>
 
 The board integrates two analog-input BNCs, a dedicated waveform-generator BNC, FPGA interconnects, logic-analyzer connectivity, clocking, power conversion, local regulation and distributed test points. Critical high-speed routes use continuous reference planes, dense ground stitching and short FDA-to-ADC interconnects.
@@ -142,13 +148,19 @@ PowerDC was run with the completed AWG load model, including the TPS61033 boost 
 ## Verification summary
 
 <p align="center">
-  <img src="docs/assets/plots/FINAL_filter_ripple.svg" width="48%" alt="Loaded AC passband ripple">
-  <img src="docs/assets/plots/FINAL_nyquist_rejection.svg" width="48%" alt="Anti-alias rejection">
+  <img src="docs/assets/plots/FINAL_filter_ripple.svg" width="860" alt="Loaded AC passband ripple">
 </p>
 
 <p align="center">
-  <img src="docs/assets/plots/FINAL_transient_adc_utilization.svg" width="48%" alt="Settled transient ADC utilization">
-  <img src="docs/assets/plots/FINAL_frontend_absolute.svg" width="48%" alt="Frontend range and input-impedance results">
+  <img src="docs/assets/plots/FINAL_nyquist_rejection.svg" width="860" alt="Anti-alias rejection">
+</p>
+
+<p align="center">
+  <img src="docs/assets/plots/FINAL_transient_adc_utilization.svg" width="860" alt="Settled transient ADC utilization">
+</p>
+
+<p align="center">
+  <img src="docs/assets/plots/FINAL_frontend_absolute.svg" width="860" alt="Frontend range and input-impedance results">
 </p>
 
 | Item | Result |
