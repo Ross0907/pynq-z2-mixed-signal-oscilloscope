@@ -57,13 +57,19 @@ The board-power model was solved after the AWG and local power architecture were
 The solved result set includes regulator voltage, sink voltage, discrete-current and board conductive-loss views. Original captures are stored under `docs/assets/powerdc/`.
 
 <p align="center">
-  <img src="assets/powerdc/vrm_voltage_summary.png" width="48%" alt="PowerDC regulator voltage results">
-  <img src="assets/powerdc/sink_voltage_summary.png" width="48%" alt="PowerDC sink voltage results">
+  <img src="assets/powerdc/vrm_voltage_summary.png" width="960" alt="PowerDC regulator voltage results">
 </p>
 
 <p align="center">
-  <img src="assets/powerdc/discrete_current_summary.png" width="48%" alt="PowerDC current results">
-  <img src="assets/powerdc/power_loss_summary.png" width="48%" alt="PowerDC board loss results">
+  <img src="assets/powerdc/sink_voltage_summary.png" width="960" alt="PowerDC sink voltage results">
+</p>
+
+<p align="center">
+  <img src="assets/powerdc/discrete_current_summary.png" width="960" alt="PowerDC current results">
+</p>
+
+<p align="center">
+  <img src="assets/powerdc/power_loss_summary.png" width="960" alt="PowerDC board loss results">
 </p>
 
 ## Hardware measurements after fabrication
