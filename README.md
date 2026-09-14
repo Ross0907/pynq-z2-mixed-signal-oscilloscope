@@ -154,16 +154,28 @@ PowerDC was run with the completed AWG load model, including the TPS61033 boost 
 
 ## Verification summary
 
-<p align="center">
-  <img src="docs/assets/plots/FINAL_filter_ripple.svg" width="49%" alt="Loaded AC passband ripple">
-  <img src="docs/assets/plots/FINAL_nyquist_rejection.svg" width="49%" alt="Anti-alias rejection">
-</p>
-
-<p align="center">
-  <img src="docs/assets/plots/FINAL_transient_adc_utilization.svg" width="49%" alt="Settled transient ADC utilization">
-  <img src="docs/assets/plots/FINAL_frontend_absolute.svg" width="49%" alt="Frontend range and input-impedance results">
-</p>
-
+<table>
+<tr>
+<td width="50%" valign="top" align="center">
+<small><strong>Loaded AC Passband Ripple</strong></small><br><br>
+<img src="docs/assets/plots/FINAL_filter_ripple.svg" width="100%" alt="Loaded AC passband ripple">
+</td>
+<td width="50%" valign="top" align="center">
+<small><strong>Anti-Alias Rejection</strong></small><br><br>
+<img src="docs/assets/plots/FINAL_nyquist_rejection.svg" width="100%" alt="Anti-alias rejection">
+</td>
+</tr>
+<tr>
+<td width="50%" valign="top" align="center">
+<small><strong>Settled Transient ADC Input Utilization</strong></small><br><br>
+<img src="docs/assets/plots/FINAL_transient_adc_utilization.svg" width="100%" alt="Settled transient ADC utilization">
+</td>
+<td width="50%" valign="top" align="center">
+<small><strong>Frontend Range and Input Impedance</strong></small><br><br>
+<img src="docs/assets/plots/FINAL_frontend_absolute.svg" width="100%" alt="Frontend range and input impedance">
+</td>
+</tr>
+</table>
 | Item | Result |
 |---|---|
 | DUAL anti-alias response | **PASS** |
