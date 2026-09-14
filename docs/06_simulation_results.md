@@ -89,7 +89,7 @@ Current values:
 
 The earlier FULL222/source-S47P diagnostic exposed a genuine compensation/parasitic sensitivity in the then-current frontend values. That diagnostic showed approximately 12 dB separation at DC collapsing toward approximately 2.2 dB through the MHz region. It remains useful root-cause evidence, but it is **not** the final absolute range model.
 
-The final absolute range signoff uses the later authoritative open-red frontend extraction and the final compensation set:
+The final absolute range verification uses the later authoritative open-red frontend extraction and the final compensation set:
 
 ```text
 C3 / C17 = 43 pF
@@ -115,7 +115,7 @@ The previous 2.1–2.3 dB range-separation result belongs to the superseded pre-
 
 ## ADC digital passive-SI verification
 
-The original upstream ADC digital PCB path was already frozen after the validated broadband extraction. The only later geometry change that required a new passive-SI check was the D1B tee to the J9 auxiliary connector.
+The original upstream ADC digital PCB path was already retained after the validated broadband extraction. The only later geometry change that required a new passive-SI check was the D1B tee to the J9 auxiliary connector.
 
 A focused PowerSI extraction was therefore run for:
 
@@ -140,14 +140,14 @@ The approximately 3.5 dB branch level is the expected three-port tee power split
 
 Final passive-board disposition:
 
-- existing upstream ADC digital SI: **FROZEN / VERIFIED**;
+- existing upstream ADC digital SI: **retained / VERIFIED**;
 - D1B tee connectivity and polarity symmetry: **PASS**;
 - J9 routing: **PASS**;
 - passivity and reciprocity: **PASS**;
 - 500 MHz insertion behavior: **PASS**;
 - mode conversion: **PASS**;
 - P/N skew: **PASS**;
-- D1B PCB/J9 passive SI: **SIGNED OFF**.
+- D1B PCB/J9 passive SI: **verified**.
 
 The optional off-board J9 cable/receiver eye test remains a hardware/system-level validation for the auxiliary dual-FAST mode; it is not an unresolved passive PCB extraction.
 

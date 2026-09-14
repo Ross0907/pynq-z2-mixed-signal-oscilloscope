@@ -1,0 +1,56 @@
+{
+  "generated": "2026-09-14T11:47:48",
+  "electrical_simulation_rerun": false,
+  "excluded": "FIX4-FIX8 direct Sep-13 FRONTEND94-to-active-chain metrics",
+  "frontend": {
+    "source": "UPLOAD_V13_FRONTEND_ABSOLUTE_SENSITIVITY_RESULTS(2).zip (previously parsed authoritative result)",
+    "model_scope": "authoritative open-red absolute frontend extraction",
+    "compensation_pF": {
+      "C3_C17": 43.0,
+      "C4_C18": 7.5,
+      "C7_C11": 110.0
+    },
+    "open_red_provenance": "PASS",
+    "topology_1Mohm_preflight": "PASS",
+    "worst_flatness_dB": 0.545893,
+    "worst_range_separation_error_dB": 0.436622,
+    "P6060": "PASS",
+    "Rin_Mohm_min": 0.997589,
+    "Rin_Mohm_max": 0.999792,
+    "Ceff_10kHz_pF_min": 16.471,
+    "Ceff_10kHz_pF_max": 41.815,
+    "sensitivity_note": "Four one-at-a-time assumed parasitic excursions exceeded 0.60 dB; these are sensitivity assumptions, not manufacturer tolerance corners or fabricated-board failures."
+  },
+  "ac": {
+    "DUAL_ripple_dB_min": 0.865,
+    "DUAL_ripple_dB_max": 0.914,
+    "DUAL_nyquist_rejection_dB_min": 36.191,
+    "DUAL_nyquist_rejection_dB_max": 36.278,
+    "DUAL_f3dB_MHz_min": 22.054,
+    "DUAL_f3dB_MHz_max": 22.073,
+    "FAST_ripple_dB_min": 0.959,
+    "FAST_ripple_dB_max": 1.134,
+    "FAST_nyquist_rejection_dB_min": 41.736,
+    "FAST_nyquist_rejection_dB_max": 42.224,
+    "FAST_f3dB_MHz_min": 41.368,
+    "FAST_f3dB_MHz_max": 41.471,
+    "AC_coupling_corner_Hz_min": 3.441,
+    "AC_coupling_corner_Hz_max": 3.471,
+    "LOW_HIGH_shape_error_dB_min": 0.332,
+    "LOW_HIGH_shape_error_dB_max": 0.45,
+    "FAST_ripple_policy": "reported; not a fabrication blocker when alias rejection and transient criteria pass",
+    "FAST_alias_hard_criterion_dB": 40.0,
+    "DUAL_alias_hard_criterion_dB": 35.0
+  },
+  "transient": {
+    "max_adc_fullscale_pct": 88.96972982035714,
+    "min_adc_fullscale_pct": 74.95355660464286
+  },
+  "board": {
+    "si_jobs": 12,
+    "si_local": "HASH_MATCHED_12_OF_12",
+    "drc": "PASS",
+    "erc": "PASS",
+    "live_kicad_hash_checks": "DISABLED"
+  }
+}

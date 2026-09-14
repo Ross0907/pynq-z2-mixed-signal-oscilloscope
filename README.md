@@ -139,11 +139,11 @@ The front end is simulated as a complete loaded signal chain rather than as isol
   <img src="docs/assets/plots/AFE_DUAL_relative_transfer.png" width="760" alt="DUAL mode AFE response">
 </p>
 
-Across the current V7 loaded AC runs:
+Across the final corrected 16-case loaded AC matrix:
 
-- `-3 dB` bandwidth: **21.955–21.978 MHz**
-- attenuation at the 31.25 MHz mode Nyquist: **36.03–36.12 dB**
-- passband ripple: **0.658–0.702 dB**
+- `-3 dB` bandwidth: **22.054–22.073 MHz**
+- attenuation at the 31.25 MHz mode Nyquist: **36.191–36.278 dB**
+- passband ripple: **0.865–0.914 dB**
 
 ### FAST filter mode
 
@@ -151,11 +151,11 @@ Across the current V7 loaded AC runs:
   <img src="docs/assets/plots/AFE_FAST_relative_transfer.png" width="760" alt="FAST mode AFE response">
 </p>
 
-Across the current V7 loaded AC runs:
+Across the final corrected 16-case loaded AC matrix:
 
-- `-3 dB` bandwidth: **41.011–41.091 MHz**
-- attenuation at the 62.5 MHz mode Nyquist: **42.00–42.22 dB**
-- passband ripple: **0.832–0.922 dB**
+- `-3 dB` bandwidth: **41.368–41.471 MHz**
+- attenuation at the 62.5 MHz mode Nyquist: **41.736–42.224 dB**
+- passband ripple: **0.959–1.134 dB**
 
 ### Filter-mode comparison
 
@@ -257,6 +257,27 @@ These screenshots are the original, unmodified PowerDC captures from the finaliz
 
 ## Verification highlights
 
+<!-- FINAL_VALIDATION_SNAPSHOT_START -->
+### Final validation snapshot
+
+<p align="center">
+  <img src="docs/assets/plots/FINAL_filter_ripple.svg" width="48%" alt="Final loaded AC passband ripple">
+  <img src="docs/assets/plots/FINAL_nyquist_rejection.svg" width="48%" alt="Final anti-alias rejection">
+</p>
+
+<p align="center">
+  <img src="docs/assets/plots/FINAL_transient_adc_utilization.svg" width="48%" alt="Settled transient ADC utilization">
+  <img src="docs/assets/plots/FINAL_frontend_absolute.svg" width="48%" alt="Open-red frontend verification">
+</p>
+
+The final corrected analog data set combines the authoritative open-red frontend extraction with the corrected 16-case active-device/filter AC matrix. DUAL ripple is **0.865–0.914 dB** with at least **36.191 dB** rejection at 31.25 MHz. FAST ripple is **0.959–1.134 dB** with at least **41.736 dB** rejection at 62.5 MHz; the residual deterministic FAST response shape is handled in calibration rather than traded against alias rejection.
+
+The open-red frontend uses the final **43 pF / 7.5 pF / 110 pF** compensation set, with **0.545893 dB** worst flatness, **0.436622 dB** worst HIGH/LOW separation error, and **0.997589–0.999792 MΩ** input resistance. All eight settled transient cases complete below ADC differential full scale; the maximum loaded utilization in that set is **88.97%**.
+
+The Sep-13 passive-SI campaign contains **12/12 validated PowerSI result sets**. The captured fabrication-revision ERC/DRC evidence reports zero DRC violations, zero unconnected pads, zero footprint errors, and zero ERC errors/warnings; live KiCad project hashes are not used as a publication gate.
+<!-- FINAL_VALIDATION_SNAPSHOT_END -->
+
+
 ### Analog AC consistency
 
 <p align="center">
@@ -292,9 +313,9 @@ Final open-red nominal verification gives **0.545893 dB worst flatness**, **0.43
 
 ### ADC digital passive SI
 
-The original upstream ADC digital interface was already frozen after the validated 1 MHz–10 GHz extraction. The only later geometry change requiring re-verification was the branched D1B path to J9. A focused six-port PowerSI extraction of `IC2 D1B± → U9 D1B± / J9 D1B±` completed with **4005 unique points from 1 MHz to 10 GHz**, numerical reciprocity to approximately `7.1e-15`, maximum singular value `0.999999324`, and passive behavior.
+The original upstream ADC digital interface was already retained after the validated 1 MHz–10 GHz extraction. The only later geometry change requiring re-verification was the branched D1B path to J9. A focused six-port PowerSI extraction of `IC2 D1B± → U9 D1B± / J9 D1B±` completed with **4005 unique points from 1 MHz to 10 GHz**, numerical reciprocity to approximately `7.1e-15`, maximum singular value `0.999999324`, and passive behavior.
 
-At the 1 Gb/s lane Nyquist frequency of 500 MHz, the extracted branches are **−3.808 dB to U9** and **−3.278 dB to J9**; the approximately 3.5 dB level is the expected three-port tee split rather than PCB dissipation. J9 P/N skew is **29.7 ps (~3.0% UI)** and J9 differential-to-common-mode conversion is **−29.1 dB** at 500 MHz. The existing upstream digital SI and the new D1B/J9 passive PCB path are therefore **signed off**.
+At the 1 Gb/s lane Nyquist frequency of 500 MHz, the extracted branches are **−3.808 dB to U9** and **−3.278 dB to J9**; the approximately 3.5 dB level is the expected three-port tee split rather than PCB dissipation. J9 P/N skew is **29.7 ps (~3.0% UI)** and J9 differential-to-common-mode conversion is **−29.1 dB** at 500 MHz. The existing upstream digital SI and the new D1B/J9 passive PCB path are therefore **verified**.
 
 ### Current pre-fabrication status
 
@@ -307,7 +328,7 @@ At the 1 Gb/s lane Nyquist frequency of 500 MHz, the extracted branches are **�
 | Modeled AD9655 + AFE dynamic performance | **PASS** |
 | AWG loaded transient / post-layout AC response | **PASS** |
 | Extracted HIGH/LOW range scaling | **PASS — authoritative open-red frontend extraction** |
-| ADC digital PCB PowerSI | **PASS — upstream frozen; D1B/J9 passive SI signed off** |
+| ADC digital PCB PowerSI | **PASS — upstream verified; D1B/J9 passive SI verified** |
 | AWG-updated PowerDC solve | **PASS** |
 | Fabricated-board characterization / calibration / thermal validation | **Pending fabrication** |
 

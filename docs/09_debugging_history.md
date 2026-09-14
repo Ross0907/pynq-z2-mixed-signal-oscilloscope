@@ -20,7 +20,7 @@ The later compact-GSpice runs completed the intended analog AC, bias, and coupli
 
 ## 4. Solver-graph continuity and port mapping
 
-Sigrity/PowerSI extraction required correction of port mapping and solver-graph continuity around the digital ADC interface. The upstream digital block was subsequently validated and frozen. The only later PCB change requiring focused re-verification was the D1B tee to the J9 auxiliary connector.
+Sigrity/PowerSI extraction required correction of port mapping and solver-graph continuity around the digital ADC interface. The upstream digital block was subsequently validated and retained. The only later PCB change requiring focused re-verification was the D1B tee to the J9 auxiliary connector.
 
 The final focused D1B extraction used six physical ports:
 
@@ -30,14 +30,14 @@ The final focused D1B extraction used six physical ports:
 
 The resulting S6P contains 4005 unique points from 1 MHz to 10 GHz, is passive, and is reciprocal to numerical precision. At 500 MHz the two branches are -3.808 dB to U9 and -3.278 dB to J9; this is dominated by the expected three-port tee split, not PCB dissipation. J9 P/N skew is 29.7 ps at 500 MHz and mode conversion is -29.1 dB.
 
-**Final disposition:** existing upstream ADC digital SI is frozen/verified and the D1B PCB/J9 passive SI is signed off. The optional off-board cable/receiver eye test remains a separate hardware/system validation for the auxiliary dual-FAST mode.
+**Final disposition:** existing upstream ADC digital SI is retained/verified and the D1B PCB/J9 passive SI is verified. The optional off-board cable/receiver eye test remains a separate hardware/system validation for the auxiliary dual-FAST mode.
 
 ## 5. HIGH/LOW range-transfer discrepancy isolated and closed
 
 A dedicated diagnostic compared:
 
 1. the extracted source S47P;
-2. the frozen compact-GSpice representation;
+2. the retained compact-GSpice representation;
 3. the schematic-reference range model;
 4. a larger extracted FULL222 network reduced to the same interface.
 

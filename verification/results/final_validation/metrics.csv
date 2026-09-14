@@ -1,0 +1,9 @@
+metric,value,unit
+Open-red frontend worst flatness,0.545893,dB
+Open-red range-separation error,0.436622,dB
+DUAL worst ripple,0.9144041183046,dB
+DUAL minimum Nyquist rejection,36.19107229798134,dB
+FAST worst ripple,1.1344587210100001,dB
+FAST minimum Nyquist rejection,41.73641106333968,dB
+Transient maximum ADC full-scale utilization,88.96972982035714,%
+PowerSI jobs verified,12,jobs
