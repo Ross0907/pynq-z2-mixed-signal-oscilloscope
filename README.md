@@ -8,7 +8,7 @@ A custom **dual-channel 16-bit mixed-signal oscilloscope, logic-analyzer interfa
 
 The project covers the complete mixed-signal path from BNC input to FPGA capture: input protection, selectable attenuation and coupling, high-speed amplification, switchable anti-alias filtering, fully differential ADC drive, source-synchronous converter interfacing, four-layer PCB implementation, waveform generation, SPICE simulation, post-layout extraction, signal-integrity analysis, and power-integrity analysis.
 
-Rev. A is currently a **pre-fabrication design**. Numerical bandwidth, SINAD/ENOB, transient, SI and power figures below are simulation or post-layout results unless explicitly identified as measured.
+Rev. A is currently a **pre-fabrication design**. Numerical bandwidth, SINAD/ENOB, transient, SI, and power figures below are simulation or post-layout results unless explicitly identified as measured.
 
 ## System summary
 
@@ -68,20 +68,20 @@ PYNQ-Z2 control
   <img src="docs/assets/hardware/revA_upload_pcbtop_f079d667f2.png" width="48.219%" alt="PCB cropped top view">
 </p>
 
-The board integrates two analog-input BNCs, a dedicated waveform-generator BNC, FPGA interconnects, logic-analyzer connectivity, clocking, power conversion, local regulation and distributed test points. Critical high-speed routes use continuous reference planes, dense ground stitching and short FDA-to-ADC interconnects.
+The board integrates two analog-input BNCs, a dedicated waveform-generator BNC, FPGA interconnects, logic-analyzer connectivity, clocking, power conversion, local regulation, and distributed test points. Critical high-speed routes use continuous reference planes, dense ground stitching, and short FDA-to-ADC interconnects.
 
 [Full schematic PDF](docs/schematics/Pynq_Oscilloscope_schematic.pdf) · [PCB layer PDF](docs/pcb/Pynq_Oscilloscope_pcb_layers.pdf)
 
 ## Analog front end
 
-The analog section was evaluated as a loaded end-to-end path rather than as isolated stages. The model includes attenuation, switching, filtering, FDA drive, ADC loading, both channels, both range states and AC/DC coupling.
+The analog section was evaluated as a loaded end-to-end path rather than as isolated stages. The model includes attenuation, switching, filtering, FDA drive, ADC loading, both channels, both range states, and AC/DC coupling.
 
 | Mode | -3 dB bandwidth | Passband ripple | Rejection at mode Nyquist |
 |---|---:|---:|---:|
 | DUAL | **22.054–22.073 MHz** | **0.865–0.914 dB** | **36.191–36.278 dB @ 31.25 MHz** |
 | FAST | **41.368–41.471 MHz** | **0.959–1.134 dB** | **41.736–42.224 dB @ 62.5 MHz** |
 
-The AC-coupled cases give a **3.441–3.471 Hz** high-pass corner. The input-range compensation uses **43 pF / 7.5 pF / 110 pF**, with **0.545893 dB** worst flatness, **0.436622 dB** worst HIGH/LOW separation error and **0.997589–0.999792 Mohm** input resistance.
+The AC-coupled cases give a **3.441–3.471 Hz** high-pass corner. The input-range compensation uses **43 pF / 7.5 pF / 110 pF**, with **0.545893 dB** worst flatness, **0.436622 dB** worst HIGH/LOW separation error, and **0.997589–0.999792 Mohm** input resistance.
 
 <p align="center">
   <img src="docs/assets/plots/AFE_DUAL_relative_transfer.png" width="99%" alt="DUAL mode AFE response">
@@ -132,11 +132,11 @@ Post-layout output-path simulation gives approximately **84.7425 MHz** -3 dB ban
 
 ## Signal and power integrity
 
-The passive-SI set covers the ADC digital interface, clocks, analog interconnects and the D1B branch to J9. The Sep-13 campaign contains **12 completed PowerSI result sets**.
+The passive-SI set covers the ADC digital interface, clocks, analog interconnects, and the D1B branch to J9. The Sep-13 campaign contains **12 completed PowerSI result sets**.
 
-For the focused D1B/J9 extraction, the S6P contains **4005 points from 1 MHz to 10 GHz**, is passive and reciprocal to numerical precision. At 500 MHz the extracted transmission is **-3.808 dB to U9** and **-3.278 dB to J9**; J9 P/N skew is **29.7 ps** and differential-to-common conversion is **-29.1 dB**.
+For the focused D1B/J9 extraction, the S6P contains **4005 points from 1 MHz to 10 GHz**, is passive, and is reciprocal to numerical precision. At 500 MHz the extracted transmission is **-3.808 dB to U9** and **-3.278 dB to J9**; J9 P/N skew is **29.7 ps** and differential-to-common conversion is **-29.1 dB**.
 
-PowerDC was run with the completed AWG load model, including the TPS61033 boost stage, LM27762 bipolar rails, AD9102, clock load and ADA4817-2 AWG stage. The repository includes the resulting regulator-voltage, sink-voltage, discrete-current and board-loss captures.
+PowerDC analysis includes the completed AWG load model, TPS61033 boost stage, LM27762 bipolar rails, AD9102, clock load, and ADA4817-2 AWG stage. The repository contains the resulting regulator-voltage, sink-voltage, discrete-current, and board-loss captures.
 
 <p align="center">
   <img src="docs/assets/powerdc/vrm_voltage_summary.png" width="99%" alt="PowerDC regulator voltage results">
@@ -150,7 +150,6 @@ PowerDC was run with the completed AWG load model, including the TPS61033 boost 
   <img src="docs/assets/powerdc/discrete_current_summary.png" width="38.882%" alt="PowerDC discrete-current results">
   <img src="docs/assets/powerdc/power_loss_summary.png" width="60.118%" alt="PowerDC board-loss results">
 </p>
-
 
 ## Verification summary
 
@@ -175,6 +174,7 @@ PowerDC was run with the completed AWG load model, including the TPS61033 boost 
 <img src="docs/assets/plots/FINAL_frontend_absolute.svg" width="100%" alt="Frontend range and input impedance">
 </td>
 </tr>
+</table>
 
 | Item | Result |
 |---|---|
@@ -188,19 +188,18 @@ PowerDC was run with the completed AWG load model, including the TPS61033 boost 
 | AWG post-layout simulation | **PASS** |
 | PowerDC with AWG loads | **PASS** |
 | PCB DRC / ERC | **0 violations / 0 warnings** |
-| Hardware characterization | **After fabrication** |
+| Hardware characterization | **Pending fabrication** |
 
+## Engineering toolchain
 
-## Tools
-
-- **KiCad** — schematic capture, four-layer layout, DRC and fabrication outputs
-- **Cadence PSpice** — analog AC, transient, bias and loaded converter-interface simulation
-- **Cadence Sigrity PowerSI** — post-layout passive extraction and SI analysis
+- **KiCad** — schematic capture, four-layer layout, DRC, and fabrication data
+- **Cadence PSpice** — analog AC, transient, bias, and loaded converter-interface simulation
+- **Cadence Sigrity PowerSI** — post-layout passive extraction and signal-integrity analysis
 - **Cadence Sigrity PowerDC** — board-level power-distribution analysis
 - **MATLAB** — simulation-data analysis and plotting
-- **ADI tools / vendor models** — converter and waveform-generation modelling
+- **ADI tools and vendor models** — converter and waveform-generation modelling
 
-## Documentation
+## Project documentation
 
 - [System architecture](docs/01_system_architecture.md)
 - [Analog front end](docs/02_analog_frontend.md)
@@ -209,7 +208,15 @@ PowerDC was run with the completed AWG load model, including the TPS61033 boost 
 - [PCB layout](docs/05_pcb_layout.md)
 - [Simulation results](docs/06_simulation_results.md)
 - [Signal and power integrity](docs/07_signal_power_integrity.md)
-- [Hardware bring-up](docs/08_bringup.md)
-- [Engineering iteration notes](docs/09_debugging_history.md)
-- [Measurement methodology](docs/10_measurement_plan.md)
+- [Hardware bring-up and characterization](docs/08_bringup.md)
+- [Engineering iteration history](docs/09_debugging_history.md)
+- [Measurement and validation methodology](docs/10_measurement_plan.md)
 - [Results index](docs/11_results.md)
+
+## License
+
+Original project material in this repository is released under the **CERN Open Hardware Licence Version 2 - Permissive (CERN-OHL-P-2.0)**. The licence covers the project source made available here, including hardware design source and related digital design material, unless a file states otherwise.
+
+See [LICENSE](LICENSE) for the complete licence text.
+
+Third-party vendor models, component libraries, trademarks, datasheets, and externally sourced material retain their respective owners' terms and are not relicensed by this repository.
