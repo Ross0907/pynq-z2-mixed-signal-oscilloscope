@@ -217,6 +217,8 @@ PowerDC analysis includes the completed AWG load model, TPS61033 boost stage, LM
 
 Original project material in this repository is released under the **CERN Open Hardware Licence Version 2 - Permissive (CERN-OHL-P-2.0)**. The licence covers the project source made available here, including hardware design source and related digital design material, unless a file states otherwise.
 
+This project was fully designed and simulated by Roshan Tripathy
+
 See [LICENSE](LICENSE) for the complete licence text.
 
 Third-party vendor models, component libraries, trademarks, datasheets, and externally sourced material retain their respective owners' terms and are not relicensed by this repository.
