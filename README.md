@@ -1,6 +1,12 @@
 # PYNQ-Z2 Mixed-Signal Oscilloscope / MDO
 
 <p align="center">
+  <a href="https://easyeda.com/" title="EasyEDA Pro"><strong>EasyEDA Pro</strong></a> · Design migration and validation in progress
+  &nbsp;&nbsp;
+  <a href="https://jlcpcb.com/" title="JLCPCB"><img src="https://github.com/JLCPCB.png?size=64" width="24" height="24" alt="JLCPCB logo" align="center"></a>
+</p>
+
+<p align="center">
   <img src="docs/assets/hardware/revA_20260914_lit_iso.png" width="960" alt="PYNQ-Z2 mixed-signal oscilloscope PCB render">
 </p>
 
@@ -71,6 +77,8 @@ PYNQ-Z2 control
 The board integrates two analog-input BNCs, a dedicated waveform-generator BNC, FPGA interconnects, logic-analyzer connectivity, clocking, power conversion, local regulation, and distributed test points. Critical high-speed routes use continuous reference planes, dense ground stitching, and short FDA-to-ADC interconnects.
 
 [Full schematic PDF](docs/schematics/Pynq_Oscilloscope_schematic.pdf) · [PCB layer PDF](docs/pcb/Pynq_Oscilloscope_pcb_layers.pdf)
+
+Native EasyEDA Pro design files will be published once the migrated PCB passes geometry, routing, solder-mask, net-connectivity, and DRC checks.
 
 ## Analog front end
 
@@ -187,12 +195,12 @@ PowerDC analysis includes the completed AWG load model, TPS61033 boost stage, LM
 | ADC digital passive SI | **PASS** |
 | AWG post-layout simulation | **PASS** |
 | PowerDC with AWG loads | **PASS** |
-| PCB DRC / ERC | **0 violations / 0 warnings** |
+| PCB DRC / ERC (Rev. A reference) | **0 violations / 0 warnings**; EasyEDA conversion validation pending |
 | Hardware characterization | **Pending fabrication** |
 
 ## Engineering toolchain
 
-- **KiCad** — schematic capture, four-layer layout, DRC, and fabrication data
+- **EasyEDA Pro** — schematic and PCB design migration; Rev. A conversion undergoing geometry, layer, net-connectivity, and DRC verification
 - **Cadence PSpice** — analog AC, transient, bias, and loaded converter-interface simulation
 - **Cadence Sigrity PowerSI** — post-layout passive extraction and signal-integrity analysis
 - **Cadence Sigrity PowerDC** — board-level power-distribution analysis
