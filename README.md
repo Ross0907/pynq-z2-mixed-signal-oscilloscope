@@ -1,9 +1,9 @@
 # PYNQ-Z2 Mixed-Signal Oscilloscope / MDO
 
 <p align="center">
-  <a href="https://easyeda.com/" title="EasyEDA Pro"><strong>EasyEDA Pro</strong></a> · Design migration and validation in progress
+  made in <a href="https://easyeda.com/" title="EasyEDA Pro"><strong>EasyEDA Pro</strong></a> 
   &nbsp;&nbsp;
-  <a href="https://jlcpcb.com/" title="JLCPCB"><img src="https://github.com/JLCPCB.png?size=64" width="24" height="24" alt="JLCPCB logo" align="center"></a>
+  <a href="https://jlcpcb.com/" title="JLCPCB"><img src="https://github.com/JLCPCB.png?size=64" width="48" height="48" alt="JLCPCB logo" align="center"></a>
 </p>
 
 <p align="center">
