@@ -15,6 +15,10 @@ The oscilloscope is implemented as a four-layer mixed-signal PCB designed around
   <img src="assets/hardware/pynq_z2_integrated_render.png" width="51.857%" alt="PCB integrated with PYNQ-Z2">
 </p>
 
+## Final manufacturing specification
+
+The finalized Rev. A PCB is a four-layer nominal 1.6 mm JLCPCB **JLC04161H-7628** standard board, FR4 Tg135, 1 oz outer/0.5 oz inner, ENIG 1 µin, **without purchased controlled-impedance service**. The selected published geometry is a modeling reference; it does not imply that impedance was ordered or guaranteed. In1.Cu is the broad GND reference plane and In2.Cu carries power pours plus 431 routed segments. See [current fabrication and simulation closeout](../verification/si_pi/JLC04161H-7628_final_20261022.md).
+
 ## Layer structure
 
 The four-layer layout uses front copper for component fanout and critical local routing, a continuous inner ground/reference plane, an inner power/secondary-routing layer and back copper for auxiliary routing. Critical high-speed paths are kept over continuous reference regions.
