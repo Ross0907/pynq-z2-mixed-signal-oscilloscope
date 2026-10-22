@@ -15,6 +15,8 @@ A custom **dual-channel 16-bit mixed-signal oscilloscope, logic-analyzer interfa
 
 The project covers the complete mixed-signal path from BNC input to FPGA capture: input protection, selectable attenuation and coupling, high-speed amplification, switchable anti-alias filtering, fully differential ADC drive, source-synchronous converter interfacing, four-layer PCB implementation, waveform generation, SPICE simulation, post-layout extraction, signal-integrity analysis, and power-integrity analysis.
 
+Rev. A is the **finalized pre-fabrication hardware revision**. Its order uses **JLCPCB JLC04161H-7628, standard four-layer 1.6 mm, with NO purchased controlled-impedance service**. Published stackup geometry is a simulation reference, not a guaranteed trace-impedance tolerance. [Current manufacturing/verification reconciliation](verification/si_pi/JLC04161H-7628_final_20261022.md).
+
 Rev. A is currently a **pre-fabrication design**. Numerical bandwidth, SINAD/ENOB, transient, SI, and power figures below are simulation or post-layout results unless explicitly identified as measured.
 
 ## System summary
