@@ -2,7 +2,13 @@
 
 This page summarizes the Rev. A post-layout SI and board-power results.
 
-## PCB reference structure
+## Current final manufacturing reference — October 22, 2026
+
+The finalized board uses **JLC04161H-7628, standard four-layer 1.6 mm (FR4 Tg135), 1 oz outer/0.5 oz inner, ENIG 1 µin**. **No controlled-impedance service is ordered.** The JLC-published geometry is 0.035 / 0.2104 / 0.0152 / 1.065 / 0.0152 / 0.2104 / 0.035 mm, copper and dielectrics from top to bottom. Its nominal conductor/dielectric total is 1.5862 mm, excluding mask. Published 7628/core Dk is 4.4/4.6. See [current final stackup and SI/PI reconciliation](../verification/si_pi/JLC04161H-7628_final_20261022.md) and [JLC's published table](https://jlcpcb.com/impedance). Actual impedance should be extracted, not presented as fabrication-controlled.
+
+**The September stack below is preserved as a historical PowerSI model only, and is not the October manufactured-stack signoff.** The current imported SPD has a 25.4× noncopper unit error and its PowerSI/PowerDC assignments must be rebuilt on the final geometry. Existing historical result figures remain historical; hardware and manufacturing outputs are unchanged.
+
+## Historical September PowerSI reference structure
 
 The four-layer PCB uses the following physical stack in the PowerSI model:
 
