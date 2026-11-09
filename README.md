@@ -1,10 +1,7 @@
 # PYNQ-Z2 Mixed-Signal Oscilloscope / MDO
 
 <p align="center">
-  Made with
-  <a href="https://easyeda.com/" title="EasyEDA Pro"><img src="docs/assets/branding/easyeda-logo.png" height="24" alt="EasyEDA Pro logo" align="center"></a>
-  &nbsp;&nbsp;&nbsp;
-  <a href="https://jlcpcb.com/" title="JLCPCB"><img src="docs/assets/branding/jlcpcb-logo.png" height="44" alt="JLCPCB logo" align="center"></a>
+  Made with KiCAD
 </p>
 
 <p align="center">
